@@ -1,17 +1,36 @@
-# Project Repository
+Smart Choice Overview:
 
-This repository will be used for team projects.
+What?
+This is a web app that can help NYU students learning about the courses in an easy and powerful way.
 
-Several sets of instructions are included in this repository. They should each be treated as separate assignments with their own due dates and sets of requirements.
+It will provide the original functionality of the NYU Albert Course Search with a simplier and beautiful user interface.
 
-1. Delete the contents of this file and replace with the contents of a proper README.md, as described in the [project setup instructions](./instructions-1a-project-setup.md)
+Under each section of the course, the app will also provide extra information such as the rating of the course, comments, syllabus, etc. (all from users of this website) that NYU Albert cannot provide.
 
-1. See the [Sprint Planning instructions](instructions-1b-sprint-planning.md) for the requirements of Sprint Planning for each Sprint.
+The courses can be selected and saved to a personalized account for future reviewing.
 
-1. See the [Front-End Development instructions](./instructions-2-front-end.md) for the requirements of the initial Front-End Development.
+How?
+The course search function is open to the public. The website will support course search by typing course name or by selecting major.
 
-1. See the [Back-End Development instructions](./instructions-3-back-end.md) for the requirements of the initial Back-End Development.
+The user can create an account to save their course choices so that it is faster for him/her to check those courses status and info. later. After logging in, the user can also share some useful information of the courses they took before by rating, commenting, uploading syllabus.
 
-1. See the [Database Integration instructions](./instructions-4-database.md) for the requirements of integrating a database into the back-end.
 
-1. See the [Deployment instructions](./instructions-5-deployment.md) for the requirements of deploying an app.
+Team Members:
+
+Avi Madsen - https://github.com/avimadsen https://abrahammadsen.com
+
+
+Short History:
+
+The current NYU Albert Course Search interface seems messy and slow. It takes too much time to research the courses. Furthermore, students have to spend extra time browsing other websites like RateMyProfessor to read students' feedback. Therefore, a web app that can combine course search and students' feedback with a cleaner user interface can save students plenty of time to make a personalized course plan.
+
+This project was built by and for NYU students looking to decrease the amount of time needed to register for classes and find out more about course offerings in their major.
+
+
+Instructions to Build and Test:
+
+Not yet available
+
+
+
+
