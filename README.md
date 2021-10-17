@@ -21,6 +21,8 @@ Avi Madsen - https://github.com/avimadsen https://abrahammadsen.com
 
 Pengfan Zhang - https://github.com/PengfanZ https://pengfanz.github.io https://www.linkedin.com/in/pengfan-zhang/
 
+Lianne Yaacoby - https://github.com/lry219 https://www.linkedin.com/in/lianne-yaacoby-768536166/ 
+
 
 Short History:
 
