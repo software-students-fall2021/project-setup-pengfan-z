@@ -25,6 +25,8 @@ Lianne Yaacoby - https://github.com/lry219 https://www.linkedin.com/in/lianne-ya
 
 Yuang Fan - https://github.com/yf1317
 
+Hans Hu - https://github.com/Hans-Hu
+
 
 ### Short History:
 
