@@ -24,6 +24,10 @@ VSCode and VSCode linter plugin.
 
 Always push working code.
 
+Remember to do pull rebase before push codes.
+
+Code review is encouraged.
+
 Provide descriptive commit messages.
 
 Don't leave dead/commented out code behind.
