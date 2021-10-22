@@ -41,6 +41,7 @@ This project was built by and for NYU students looking to decrease the amount of
 
 Not yet available
 
+To run front-end, navigate to the front-end folder. Run "npm install" then test with "npm start".
 
 
 
