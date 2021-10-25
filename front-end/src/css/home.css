@@ -1,0 +1,9 @@
+.class{
+    background-color:lightgrey;
+    color: blue;
+    padding: 20px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}

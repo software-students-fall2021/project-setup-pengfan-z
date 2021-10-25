@@ -3,6 +3,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "./pages/Home";
 import Header from "./components/Header";
 
 function App() {
@@ -16,10 +17,11 @@ function App() {
             <Header />
             <Login />
           </Route>
+    
           <Route path='/'>
             <Header />
-            {/* <Home /> */}
-          </Route>
+            <Home /> 
+            </Route>
         </Switch>
       </Router>
     </div>
