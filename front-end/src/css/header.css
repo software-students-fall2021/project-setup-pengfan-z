@@ -1,0 +1,11 @@
+.background {
+  background-color: lightgray;
+}
+
+.burger {
+  width: 50%;
+}
+
+.burgerLink {
+  margin-bottom: 0.5em;
+}
