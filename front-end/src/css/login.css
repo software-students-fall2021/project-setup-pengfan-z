@@ -11,3 +11,7 @@
 .input {
   margin-top: 0.5em;
 }
+
+.navLink {
+  text-decoration: none;
+}
