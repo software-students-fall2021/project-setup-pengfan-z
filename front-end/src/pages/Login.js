@@ -12,7 +12,6 @@ function Login() {
 
   return (
     <div>
-      <h1>Login</h1>
       {/* <h2>{password}</h2> */}
       {/* <form> */}
       <Container fluid className='form justify-content-center'>
@@ -26,12 +25,13 @@ function Login() {
             <input
               type='text'
               onChange={(event) => setUserName(event.target.value)}
+              className='input'
             ></input>
           </Col>
         </Row>
         <Row>
           <Col>
-            <label>Password: </label>
+            <label className='input'>Password: </label>
           </Col>
         </Row>
         <Row>
@@ -39,6 +39,7 @@ function Login() {
             <input
               type='password'
               onChange={(event) => setPassWord(event.target.value)}
+              className='input'
             ></input>
           </Col>
         </Row>

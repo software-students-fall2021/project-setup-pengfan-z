@@ -3,6 +3,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./components/Header";
 
 function App() {
   return (
@@ -12,9 +13,13 @@ function App() {
         <Switch>
           {/* Now type http://localhost:3000/login to go to the login page */}
           <Route path='/login'>
+            <Header />
             <Login />
           </Route>
-          <Route path='/'>{/* <Home /> */}</Route>
+          <Route path='/'>
+            <Header />
+            {/* <Home /> */}
+          </Route>
         </Switch>
       </Router>
     </div>
