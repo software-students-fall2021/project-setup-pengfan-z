@@ -1,21 +1,15 @@
 import { useState } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
-import "../css/login.css";
 import { Link } from "react-router-dom";
+import "../css/createAccount.css";
 
-function Login() {
-  const [username, setUserName] = useState("");
-  const [password, setPassWord] = useState("");
-
-  const handleLogin = () => {
-    console.log(`Username: ${username}; Password: ${password}`);
-  };
-
+const CreateAccount = () => {
+  const [newUserName, setUserName] = useState("");
+  const [newPassword, setPassWord] = useState("");
   return (
     <div>
-      {/* <h2>{password}</h2> */}
-      {/* <form> */}
-      <Container fluid className='form justify-content-center'>
+      <h4 className='title'>Create Account</h4>
+      <Container fluid className='form justify-content-top'>
         <Row>
           <Col>
             <label>Username:</label>
@@ -46,17 +40,6 @@ function Login() {
         </Row>
         <Row>
           <Col>
-            <Button
-              variant='outline-primary'
-              className='button'
-              onClick={handleLogin}
-            >
-              Login
-            </Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
             <Button className='button' variant='outline-primary'>
               <Link to='/create-account' className='navLink'>
                 Create Account
@@ -68,6 +51,6 @@ function Login() {
       </Container>
     </div>
   );
-}
+};
 
-export default Login;
+export default CreateAccount;

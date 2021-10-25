@@ -1,11 +1,11 @@
 // import logo from "./logo.svg";
-// import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import Header from "./components/Header";
 import User from "./pages/User";
+import CreateAccount from "./pages/CreateAccount";
 
 function App() {
   return (
@@ -18,16 +18,19 @@ function App() {
             <Header />
             <Login />
           </Route>
-          <Route path = '/user'>
-          <Header /> 
-           <User /> 
-            </Route>
+          <Route path='/user'>
+            <Header />
+            <User />
+          </Route>
 
-    
+          <Route path='/create-account'>
+            <Header />
+            <CreateAccount />
+          </Route>
           <Route path='/'>
             <Header />
-            <Home /> 
-            </Route>
+            <Home />
+          </Route>
         </Switch>
       </Router>
     </div>
