@@ -9,3 +9,7 @@
 .burgerLink {
   margin-bottom: 0.5em;
 }
+
+.navLink {
+  text-decoration: none;
+}
