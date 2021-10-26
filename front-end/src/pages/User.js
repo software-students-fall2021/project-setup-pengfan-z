@@ -12,25 +12,25 @@ class User extends Component{
 		super(props)
 		this.state = {
 			courses: [
-				{id:1, school: 'CAS', courseName: '484: Agile Software Engineering'},
-				{id:2, school: 'CAS', courseName: '467: Applied Internet Technology'}	
+				{id:1, school: 'CAS', courseName: '484: Agile Software Engineering', link: "/cas"},
+				{id:2, school: 'CAS', courseName: '467: Applied Internet Technology', link: "/cas"}	
 			]
 		}
 	}
 renderTableData() {
 	return this.state.courses.map((course, index) => {
-	   const { id, school, courseName } = course 
+	   const { id, school, courseName, link} = course 
 	   return (
 		  <tr key={id}>
 			 <td>{id}</td>
-			 <td>{school}</td>
+			 <td><a href={link}>{school}</a></td>
 			 <td>{courseName}</td>
 		  </tr>
 	   )
 	})
  }
  renderTableHeader(){
-	 let header = Object.keys(this.state.courses[0])
+	 let header = Object.keys(this.state.courses[0]).filter(i => i !== 'link')
 	 return header.map((key,index) =>{
 		 return <th key = {index}>{key.toUpperCase()}</th>
 	 })
