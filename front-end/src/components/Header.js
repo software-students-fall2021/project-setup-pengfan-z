@@ -18,14 +18,21 @@ const Header = () => {
                 <Link className='burgerLink' to='/cas'>
                   CAS
                 </Link>
+                <Link className='burgerLink' to='/user'>
+                  My Account
+                </Link>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
           <Navbar.Brand>
-            <Link to='/'>Smart Choice</Link>
+            <Link to='/' className='navLink'>
+              Smart Choice
+            </Link>
           </Navbar.Brand>
           <Navbar.Brand>
-            <Link to='/login'>Login</Link>
+            <Link to='/login' className='navLink'>
+              Login
+            </Link>
           </Navbar.Brand>
         </Container>
       </Navbar>
