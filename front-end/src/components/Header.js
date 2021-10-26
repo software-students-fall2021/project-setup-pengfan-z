@@ -18,6 +18,9 @@ const Header = () => {
                 <Link className='burgerLink' to='/cas'>
                   CAS
                 </Link>
+                <Link className='burgerLink' to='/user'>
+                  My Account
+                </Link>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

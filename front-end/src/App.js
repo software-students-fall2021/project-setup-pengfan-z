@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import Header from "./components/Header";
+import User from "./pages/User";
 
 function App() {
   return (
@@ -17,6 +18,11 @@ function App() {
             <Header />
             <Login />
           </Route>
+          <Route path = '/user'>
+          <Header /> 
+           <User /> 
+            </Route>
+
     
           <Route path='/'>
             <Header />
