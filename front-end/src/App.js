@@ -6,30 +6,34 @@ import Home from "./pages/Home";
 import Header from "./components/Header";
 import User from "./pages/User";
 import CreateAccount from "./pages/CreateAccount";
+import CourseInfo from "./pages/CourseInfo";
 
 function App() {
   return (
     <div className='App'>
       {/* Router for linking different pages */}
       <Router>
+        <Header />
         <Switch>
           {/* Now type http://localhost:3000/login to go to the login page */}
           <Route path='/login'>
-            <Header />
             <Login />
-          </Route>
-          <Route path='/user'>
-            <Header />
-            <User />
           </Route>
 
           <Route path='/create-account'>
-            <Header />
             <CreateAccount />
           </Route>
+
+          <Route path='/user'>
+            <User />
+          </Route>
+
+          <Route path='/:college/:courseId'>
+            <CourseInfo />
+          </Route>
+    
           <Route path='/'>
-            <Header />
-            <Home />
+            <Home /> 
           </Route>
         </Switch>
       </Router>
