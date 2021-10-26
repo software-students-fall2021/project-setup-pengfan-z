@@ -11,6 +11,7 @@ function Login() {
   const [alert, setAlert] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [data, setData] = useState([]);
+  const [isValid, setIsValid] = useState(false);
 
   const handleLogin = () => {
     console.log(data);
@@ -23,7 +24,7 @@ function Login() {
     } else {
       console.log(`Username: ${username}; Password: ${password}`);
       // Should redirect to account page
-      <Redirect to='/' />;
+      setIsValid(true);
     }
   };
 
@@ -52,71 +53,75 @@ function Login() {
     fetchData();
   }, []);
 
-  return (
-    <div>
-      {/* <h2>{password}</h2> */}
-      {/* <form> */}
-      <Alert
-        variant='danger'
-        onClose={() => setShowAlert(false)}
-        show={showAlert}
-        dismissible
-      >
-        <p>{alert}</p>
-      </Alert>
-      <Container fluid className='form justify-content-center'>
-        <Row>
-          <Col>
-            <label>Username:</label>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <input
-              type='text'
-              onChange={(event) => setUserName(event.target.value)}
-              className='input'
-            ></input>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <label className='input'>Password: </label>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <input
-              type='password'
-              onChange={(event) => setPassWord(event.target.value)}
-              className='input'
-            ></input>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button
-              variant='outline-primary'
-              className='button'
-              onClick={handleLogin}
-            >
-              Login
-            </Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button className='button' variant='outline-primary'>
-              <Link to='/create-account' className='navLink'>
-                Create Account
-              </Link>
-            </Button>
-          </Col>
-        </Row>
-        {/* </form> */}
-      </Container>
-    </div>
-  );
+  if (isValid) {
+    return <Redirect to='/' />;
+  } else {
+    return (
+      <div>
+        {/* <h2>{password}</h2> */}
+        {/* <form> */}
+        <Alert
+          variant='danger'
+          onClose={() => setShowAlert(false)}
+          show={showAlert}
+          dismissible
+        >
+          <p>{alert}</p>
+        </Alert>
+        <Container fluid className='form justify-content-center'>
+          <Row>
+            <Col>
+              <label>Username:</label>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <input
+                type='text'
+                onChange={(event) => setUserName(event.target.value)}
+                className='input'
+              ></input>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <label className='input'>Password: </label>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <input
+                type='password'
+                onChange={(event) => setPassWord(event.target.value)}
+                className='input'
+              ></input>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button
+                variant='outline-primary'
+                className='button'
+                onClick={handleLogin}
+              >
+                Login
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button className='button' variant='outline-primary'>
+                <Link to='/create-account' className='navLink'>
+                  Create Account
+                </Link>
+              </Button>
+            </Col>
+          </Row>
+          {/* </form> */}
+        </Container>
+      </div>
+    );
+  }
 }
 
 export default Login;
