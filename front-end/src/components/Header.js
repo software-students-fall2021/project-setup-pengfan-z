@@ -25,10 +25,14 @@ const Header = () => {
             </Offcanvas.Body>
           </Navbar.Offcanvas>
           <Navbar.Brand>
-            <Link to='/'>Smart Choice</Link>
+            <Link to='/' className='navLink'>
+              Smart Choice
+            </Link>
           </Navbar.Brand>
           <Navbar.Brand>
-            <Link to='/login'>Login</Link>
+            <Link to='/login' className='navLink'>
+              Login
+            </Link>
           </Navbar.Brand>
         </Container>
       </Navbar>
