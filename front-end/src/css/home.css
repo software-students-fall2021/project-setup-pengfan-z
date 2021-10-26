@@ -1,8 +1,180 @@
-.class{
+.classCAS{
     background-color:lightgrey;
-    color: blue;
-    padding: 20px 25px;
+    background-image: url(https://cas.nyu.edu/content/dam/nyu-as/cas/images/CollegeAndCity.jpg);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
     text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classDNT{
+    background-color:lightgrey;
+    background-image: url(https://i2.wp.com/nyunews.com/wp-content/uploads/2020/09/news-dentistry.jpg?fit=900%2C600&ssl=1);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classCRT{
+    background-color:lightgrey;
+    background-image: url(https://www.risk.net/sites/risk/files/styles/landscape_750_463/public/2017-09/46-Courant.jpg?h=64b92408&itok=YLTZNXAL);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classGLT{
+    background-color:lightgrey;
+    background-image: url(https://gallatin.nyu.edu/dam/gallatin/photos/1col-content-box/Building%20Exterior.jpg);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classSTN{
+    background-color:lightgrey;
+    background-image: url(https://www.stern.nyu.edu/sites/default/files/styles/full_width_component/public/assets/images/UC-Image-FullWidth-2505x1326-StudentsInFrontOfTischHall.jpg?itok=AzjSxGjn);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classWGR{
+    background-color:lightgrey;
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/NYU_Puck_Building.jpg/220px-NYU_Puck_Building.jpg);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classNUR{
+    background-color:lightgrey;
+    background-image: url(https://media-exp1.licdn.com/dms/image/C511BAQGi8ghP9Vy_Sw/company-background_10000/0/1519803651777?e=2159024400&v=beta&t=QItVNvi3EBLN6cEjKfL3v6vAao5hQqmnth0Lcl1YlpA);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classGPH{
+    background-color:lightgrey;
+    background-image: url(https://publichealth.nyu.edu/sites/default/files/2020-11/GPH%20New%20Building_HR.jpg);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classLAW{
+    background-color:lightgrey;
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Nyu_law_vanderbilt.jpg/500px-Nyu_law_vanderbilt.jpg);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classSIL{
+    background-color:lightgrey;
+    background-image: url(https://socialwork.nyu.edu/content/dam/nyusilver/1950x1096/NYU_Exterior-6.jpg/_jcr_content/renditions/nyusilver.style.1600.900.jpg);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classSTD{
+    background-color:lightgrey;
+    background-image: url(https://steinhardt.nyu.edu/sites/default/files/styles/facebook/public/2019-08/nyc_school_buildings_9G0-WrtQ.jpg?h=6413f173&itok=w7Y5nRcZ);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classTDN{
+    background-color:lightgrey;
+    background-image: url(https://engineering.nyu.edu/sites/default/files/styles/content_header_default_1x/public/2018-07/grad_admissions_billboard-vising-nyu.jpg?h=34ca2a24&itok=_rjtugFA);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.classTIS{
+    background-color:lightgrey;
+    background-image: url(https://tisch.nyu.edu/content/dam/tisch/shared/IMG_0467-2.jpg);
+    color: rgb(255, 255, 255);
+    padding: 40px 25px;
+    text-align: center;
+    text-shadow: 5px 5px 10px black;
+    font-size: x-large;
+    font-weight: 800;
     text-decoration: none;
     display: inline-block;
     width: 100%;
