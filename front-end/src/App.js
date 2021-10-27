@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import User from "./pages/User";
 import CreateAccount from "./pages/CreateAccount";
 import CourseInfo from "./pages/CourseInfo";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
 
           <Route path='/:college/:courseId'>
             <CourseInfo />
+          </Route>
+
+          <Route path='/contact'>
+            <Contact />
           </Route>
     
           <Route path='/'>
