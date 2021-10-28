@@ -68,7 +68,7 @@ function Login() {
         >
           <p>{alert}</p>
         </Alert>
-        <Container fluid className='form1'>
+        <Container fluid className='loginForm'>
           <Row>
             <Col className='d-flex justify-content-center align-items-center'>
               <Form.Group>
