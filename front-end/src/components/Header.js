@@ -6,7 +6,7 @@ import "../css/header.css";
 const Header = () => {
   return (
     <div>
-      <Navbar expand={false} className='background'>
+      <Navbar expand={false} className='background navbar-dark'>
         <Container fluid>
           <Navbar.Toggle aria-controls='offcanvasNavbar' />
           <Navbar.Offcanvas id='offcanvasNavbar' className='burger'>

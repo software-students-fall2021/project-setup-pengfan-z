@@ -1,17 +1,13 @@
-.form {
-  margin-top: 30%;
+.form1 {
+  margin-top: 10px;
   max-width: 50%;
-  /* min-width: 50%; */
+  justify-content: center;
 }
 
 .button {
   margin-top: 1em;
 }
 
-.input {
-  margin-top: 0.5em;
-}
-
-.navLink {
+.btnLink {
   text-decoration: none;
 }
