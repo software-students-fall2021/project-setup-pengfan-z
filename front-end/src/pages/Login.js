@@ -5,7 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 
-function Login() {
+function Login(props) {
   const [username, setUserName] = useState("");
   const [password, setPassWord] = useState("");
   const [alert, setAlert] = useState("");
@@ -54,6 +54,7 @@ function Login() {
   }, []);
 
   if (isValid) {
+    props.SetLoginState({ name: username, path: "/user" });
     return <Redirect to='/user' />;
   } else {
     return (
