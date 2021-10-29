@@ -8,6 +8,7 @@ import User from "./pages/User";
 import CreateAccount from "./pages/CreateAccount";
 import CourseInfo from "./pages/CourseInfo";
 import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -36,11 +37,12 @@ function App() {
           <Route path='/contact'>
             <Contact />
           </Route>
-    
+
           <Route path='/'>
-            <Home /> 
+            <Home />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </div>
   );
