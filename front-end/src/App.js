@@ -9,17 +9,23 @@ import CreateAccount from "./pages/CreateAccount";
 import CourseInfo from "./pages/CourseInfo";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
+import { useState } from "react";
 
 function App() {
+  const [loginState, setLoginState] = useState({
+    name: "Login",
+    path: "/login",
+  });
+
   return (
     <div className='App'>
       {/* Router for linking different pages */}
       <Router>
-        <Header />
+        <Header LoginState={loginState} SetLoginState={setLoginState} />
         <Switch>
           {/* Now type http://localhost:3000/login to go to the login page */}
           <Route path='/login'>
-            <Login />
+            <Login LoginState={loginState} SetLoginState={setLoginState} />
           </Route>
 
           <Route path='/create-account'>
