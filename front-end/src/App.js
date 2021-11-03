@@ -10,6 +10,8 @@ import CourseInfo from "./pages/CourseInfo";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 import { useState } from "react";
+import Majors from "./pages/Majors";
+import "./css/app.css";
 
 function App() {
   const [loginState, setLoginState] = useState({
@@ -35,6 +37,8 @@ function App() {
           <Route path='/user'>
             <User />
           </Route>
+
+          <Route path='/school/:schoolId' component={Majors} />
 
           <Route path='/:college/:courseId'>
             <CourseInfo />
