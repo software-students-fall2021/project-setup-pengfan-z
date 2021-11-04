@@ -5,6 +5,7 @@ const axios = require("axios"); // middleware for making requests to APIs
 const morgan = require("morgan"); // middleware for nice logging of incoming HTTP requests
 
 const { majorsRouter } = require("./routes/majors");
+const { coursesRouter} = require("./routes/courses");
 
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")); // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -20,6 +21,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/majors", majorsRouter);
+
+app.use("/courses", coursesRouter);
 
 // start by calling nodemon server
 
