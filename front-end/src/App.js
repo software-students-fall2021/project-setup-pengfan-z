@@ -38,11 +38,11 @@ function App() {
             <User />
           </Route>
 
-          <Route path='/school/:schoolId' component={Majors} />
-
-          <Route path='/:college/:courseId'>
+          <Route path='/school/:schoolId/:subjectId/:courseId'>
             <CourseInfo />
           </Route>
+
+          <Route path='/school/:schoolId' component={Majors} />
 
           <Route path='/contact'>
             <Contact />

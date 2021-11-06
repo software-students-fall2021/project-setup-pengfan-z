@@ -1,9 +1,9 @@
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useParams, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import "../css/courseInfo.css";
 
-//TODO: move to components folder
 const UserReview = props => {
     console.log(props.details);
     return (
@@ -26,35 +26,22 @@ const UserReview = props => {
 }
 
 const CourseInfo = () => {
-    const { college, courseId } = useParams();
-    //TODO: get data from database/mockaroo using courseId
+    const { schoolId, subjectId, courseId } = useParams();
 
     const [courseInfo, setCourseInfo] = useState();
 
-    //TODO: get data from mongodb using courseId
+    //TODO: get course info from back-end
     const fetchData = async() => {
-        // hardcoded mock data, accidently went over the rate limit for mockaroo...
-        return {"id":{"$oid":"61784016fc13ae7bc200152c"},"name":"Marketing","prerequisite":"Human Resources","description":"augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet turpis","status":true,"avgRating":0,
-        "userReviews":[{"id": 1, "username": "user1234", "rating": 1, "comment": "I loved taking this course with Professor Bloomberg, the skills I leared here were immediately applicable to my computer science job search!"}, {"id": 2, "username": "user4321", "rating": 5, "comment": "Hated this course, too much work"}]};
-        const myHeaders = new Headers({
-            "X-API-Key": "eccb0b30"
-        });
+        let response = await axios(
+            "https://my.api.mockaroo.com/course_info.json?key=eccb0b30"
+        );
 
-        let response = await fetch("https://my.api.mockaroo.com/course_info.json", {
-            method: "GET",
-            headers: myHeaders,
-            mode: "cors"
-        });
+        //TODO: redirect to schoolId page if course doesn't exist
 
-        const data = response.json();
+        const data = response.data;
 
-        response = await fetch("https://my.api.mockaroo.com/user_review.json", {
-            method: "GET",
-            headers: myHeaders,
-            mode: "cors"
-        });
-
-        data.userReviews = response.json();
+        response = await axios(`/comments/${courseId}`);
+        data.userReviews = response.data;
 
         return data;
     }
@@ -64,8 +51,6 @@ const CourseInfo = () => {
         console.log(data);
         setCourseInfo(data);
     }
-
-    //TODO: redirect to college page if course doesn't exist
 
     useEffect(() => { getCourseInfo(); }, []);
     console.log(courseInfo);
@@ -78,12 +63,12 @@ const CourseInfo = () => {
                 <Container fluid className='course-container justify-content-center'>
                     <Row className='text-center'>
                         <Col>
-                            <Link to={"/" + college}><i>Return to Majors</i></Link>
+                            <Link to={"/" + schoolId}><i>Return to Majors</i></Link>
                         </Col>
                     </Row>
                     <Row className='text-center'>
                         <Col>
-                            <h1>{college + " - " + courseInfo.name}</h1>
+                            <h1>{schoolId + " - " + courseInfo.name}</h1>
                         </Col>
                     </Row>
                     <Row>
