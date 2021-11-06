@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import "../css/header.css";
 
 // Reusable Header Component
-const Header = () => {
+const Header = (props) => {
   return (
     <div>
-      <Navbar expand={false} className='background'>
+      <Navbar expand={false} className='background navbar-dark fixed-top'>
         <Container fluid>
           <Navbar.Toggle aria-controls='offcanvasNavbar' />
           <Navbar.Offcanvas id='offcanvasNavbar' className='burger'>
@@ -30,8 +30,8 @@ const Header = () => {
             </Link>
           </Navbar.Brand>
           <Navbar.Brand>
-            <Link to='/login' className='navLink'>
-              Login
+            <Link to={props.LoginState.path} className='navLink'>
+              {props.LoginState.name}
             </Link>
           </Navbar.Brand>
         </Container>

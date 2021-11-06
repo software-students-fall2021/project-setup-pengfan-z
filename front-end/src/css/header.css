@@ -4,6 +4,7 @@
 
 .burger {
   width: 50%;
+  border-color: white;
 }
 
 .burgerLink {
@@ -12,4 +13,5 @@
 
 .navLink {
   text-decoration: none;
+  color: white;
 }

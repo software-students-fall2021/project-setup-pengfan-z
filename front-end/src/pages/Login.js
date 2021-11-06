@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Button, Container, Row, Col, Alert } from "react-bootstrap";
+import { Button, Container, Row, Col, Alert, Form } from "react-bootstrap";
 import "../css/login.css";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 
-function Login() {
+function Login(props) {
   const [username, setUserName] = useState("");
   const [password, setPassWord] = useState("");
   const [alert, setAlert] = useState("");
@@ -54,7 +54,8 @@ function Login() {
   }, []);
 
   if (isValid) {
-    return <Redirect to='/' />;
+    props.SetLoginState({ name: username, path: "/user" });
+    return <Redirect to='/user' />;
   } else {
     return (
       <div>
@@ -68,37 +69,31 @@ function Login() {
         >
           <p>{alert}</p>
         </Alert>
-        <Container fluid className='form justify-content-center'>
+        <Container fluid className='loginForm'>
           <Row>
-            <Col>
-              <label>Username:</label>
+            <Col className='d-flex justify-content-center align-items-center'>
+              <Form.Group>
+                <Form.Label>Username:</Form.Label>
+                <Form.Control
+                  type='text'
+                  onChange={(event) => setUserName(event.target.value)}
+                ></Form.Control>
+              </Form.Group>
             </Col>
           </Row>
           <Row>
-            <Col>
-              <input
-                type='text'
-                onChange={(event) => setUserName(event.target.value)}
-                className='input'
-              ></input>
+            <Col className='d-flex justify-content-center align-items-center'>
+              <Form.Group>
+                <Form.Label className='input'>Password: </Form.Label>
+                <Form.Control
+                  type='password'
+                  onChange={(event) => setPassWord(event.target.value)}
+                ></Form.Control>
+              </Form.Group>
             </Col>
           </Row>
           <Row>
-            <Col>
-              <label className='input'>Password: </label>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <input
-                type='password'
-                onChange={(event) => setPassWord(event.target.value)}
-                className='input'
-              ></input>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
+            <Col className='d-flex justify-content-center align-items-center'>
               <Button
                 variant='outline-primary'
                 className='button'
@@ -109,9 +104,9 @@ function Login() {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className='d-flex justify-content-center align-items-center'>
               <Button className='button' variant='outline-primary'>
-                <Link to='/create-account' className='navLink'>
+                <Link to='/create-account' className='btnLink'>
                   Create Account
                 </Link>
               </Button>

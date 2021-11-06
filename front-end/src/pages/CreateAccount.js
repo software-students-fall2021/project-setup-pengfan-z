@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Container, Row, Col, Alert } from "react-bootstrap";
+import { Button, Container, Row, Col, Alert, Form } from "react-bootstrap";
 import "../css/createAccount.css";
 
 const CreateAccount = () => {
@@ -38,51 +38,45 @@ const CreateAccount = () => {
       >
         <p>{alert}</p>
       </Alert>
-      <Container fluid className='form justify-content-top'>
+      <Container fluid className='form'>
         <Row>
-          <Col>
-            <label>Username:</label>
+          <Col className='d-flex justify-content-center align-items-center'>
+            <Form.Group>
+              <Form.Label>Username:</Form.Label>
+              <Form.Control
+                type='text'
+                onChange={(event) => setUserName(event.target.value)}
+                className='input'
+              ></Form.Control>
+            </Form.Group>
           </Col>
         </Row>
         <Row>
-          <Col>
-            <input
-              type='text'
-              onChange={(event) => setUserName(event.target.value)}
-              className='input'
-            ></input>
+          <Col className='d-flex justify-content-center align-items-center'>
+            <Form.Group>
+              <Form.Label>Password: </Form.Label>
+              <Form.Control
+                type='password'
+                onChange={(event) => setPassWord(event.target.value)}
+                className='input'
+              ></Form.Control>
+            </Form.Group>
           </Col>
         </Row>
         <Row>
-          <Col>
-            <label className='input'>Password: </label>
+          <Col className='d-flex justify-content-center align-items-center'>
+            <Form.Group>
+              <Form.Label className='input'>Confirm Password: </Form.Label>
+              <Form.Control
+                type='password'
+                onChange={(event) => setRepeatedPassword(event.target.value)}
+                className='input'
+              ></Form.Control>
+            </Form.Group>
           </Col>
         </Row>
         <Row>
-          <Col>
-            <input
-              type='password'
-              onChange={(event) => setPassWord(event.target.value)}
-              className='input'
-            ></input>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <label className='input'>Confirm Password: </label>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <input
-              type='password'
-              onChange={(event) => setRepeatedPassword(event.target.value)}
-              className='input'
-            ></input>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
+          <Col className='d-flex justify-content-center align-items-center'>
             <Button
               className='button'
               variant='outline-primary'
