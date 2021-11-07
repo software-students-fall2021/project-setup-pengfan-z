@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import { useState } from "react";
 import Majors from "./pages/Majors";
 import "./css/app.css";
+import Courses from "./pages/Courses";
 
 function App() {
   const [loginState, setLoginState] = useState({
@@ -37,6 +38,14 @@ function App() {
           <Route path='/user'>
             <User />
           </Route>
+
+          <Route exact path='/school/:schoolId' component={Majors} />
+
+          <Route
+            exact
+            path='/school/:schoolId/:subjectId'
+            component={Courses}
+          />
 
           <Route path='/school/:schoolId/:subjectId/:courseId'>
             <CourseInfo />

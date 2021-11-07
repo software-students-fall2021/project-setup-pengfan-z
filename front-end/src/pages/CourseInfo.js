@@ -91,7 +91,7 @@ const CourseInfo = () => {
                     </Row>
     
                     {courseInfo.userReviews?.map(review => (
-                        <UserReview key={review.id} details={review} />
+                        <UserReview key={review.id['$oid']} details={review} />
                     ))}
                     
                 </Container>
