@@ -1,16 +1,15 @@
-import { Button, Container, Row, Col } from "react-bootstrap";
-import { useParams, Link } from 'react-router-dom';
+import { Container, Row, Col } from "react-bootstrap";
+import { useParams, useHistory, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import "../css/courseInfo.css";
 
 const UserReview = props => {
-    console.log(props.details);
     return (
         <div>
             <Row>
                 <Col>
-                    <p className='text-start'>{props.details.username}:</p>
+                    <p className='text-start'>{props.details.username}</p>
                 </Col>
                 <Col>
                     <p className='text-end'>Rating: {props.details.rating}</p>
@@ -27,33 +26,65 @@ const UserReview = props => {
 
 const CourseInfo = () => {
     const { schoolId, subjectId, courseId } = useParams();
-
     const [courseInfo, setCourseInfo] = useState();
+    const [showMore, setShowMore] = useState(false);
+    const history = useHistory()
 
-    //TODO: get course info from back-end
     const fetchData = async() => {
         let response = await axios(
-            "https://my.api.mockaroo.com/course_info.json?key=eccb0b30"
+            `/courses/${schoolId}/${subjectId}`
         );
 
-        //TODO: redirect to schoolId page if course doesn't exist
+        let data = response.data.filter(course => course.deptCourseId == courseId);
+        if (data.length === 0) {
+            history.push(`/school/${schoolId}/${subjectId}`);
+            return null;
+        }
+        data = data[0]
+        if (data.sections.length > 0) {
+            data.prerequisite = data.sections[0].prerequisite;
+        }
 
-        const data = response.data;
+        console.log(data);
 
         response = await axios(`/comments/${courseId}`);
         data.userReviews = response.data;
+        data.avgRating = 0
+        if (data.userReviews.length > 0) {
+            data.avgRating = Math.round(data.userReviews.reduce((sum, review) => sum + review.rating, 0) / data.userReviews.length);
+        }
 
         return data;
     }
 
     const getCourseInfo = async() => {
         let data = await fetchData();
-        console.log(data);
         setCourseInfo(data);
     }
 
     useEffect(() => { getCourseInfo(); }, []);
-    console.log(courseInfo);
+
+    const formatDescriptionText = (description) => {
+        if (description === undefined) return description;
+        if (description.length <= 70) {
+            return <p>Description: {description}</p>;
+        }
+        if (description.length > 70 && showMore) {
+            return (
+                <p>
+                    <a onClick={() => setShowMore(false)}>Description: {description} <i>Show less</i></a>
+                </p>
+            )
+        }
+        if (description.length > 70) {
+            return (
+                <p>
+                    <a onClick={() => setShowMore(true)}>Description: {description.slice(0, 70)} <i>...show more</i></a>
+                </p>
+            )
+        }
+    }
+
     if (courseInfo === undefined) {
         return null;
     }
@@ -63,7 +94,7 @@ const CourseInfo = () => {
                 <Container fluid className='course-container justify-content-center'>
                     <Row className='text-center'>
                         <Col>
-                            <Link to={"/" + schoolId}><i>Return to Majors</i></Link>
+                            <Link to={`/school/${schoolId}/${subjectId}`}><i>Return to Courses</i></Link>
                         </Col>
                     </Row>
                     <Row className='text-center'>
@@ -86,7 +117,7 @@ const CourseInfo = () => {
                     </Row>
                     <Row className='text-center'>
                         <Col>
-                            <p>Brief description: {courseInfo.description}</p>
+                            {formatDescriptionText(courseInfo.description)}
                         </Col>
                     </Row>
     
