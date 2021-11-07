@@ -3,10 +3,6 @@ const axios = require("axios");
 
 const majorsRouter = Router();
 
-// majorsRouter.get("/", (req, res) => {
-//   res.send("Got a GET request for majors");
-// });
-
 // schoolId is the school code from Schedge API
 // Input: params about schoolId
 // Output: objects with subject code as keys and subject names as values
