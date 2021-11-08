@@ -1,10 +1,10 @@
-const { Router } = require("express");
-const axios = require("axios");
+const { Router } = require('express');
+const axios = require('axios');
 const loginRouter = Router();
-const e = require("express");
-const account = require("../public/teamPasswords.js");
+const e = require('express');
+const account = require('../public/teamPasswords.js');
 
-loginRouter.get("/", (req, res) => {
+loginRouter.get('/', (req, res) => {
   let userName = req.query.username;
   let passWord = req.query.password;
   // let storedUsername = account.accountName;
@@ -25,15 +25,15 @@ loginRouter.get("/", (req, res) => {
       console.log(key.accountName);
       if (key.accountPassword == passWord) {
         console.log(key.accountPassword);
-        return res.send({ response: "success" });
+        return res.send({ response: 'success' });
         // console.log("Found");
       }
     }
 
     //we need to capture accountName
   }
-  res.send({ response: "hello" });
-  console.log("Not Found");
+  res.send({ response: 'hello' });
+  console.log('Not Found');
   /*  try{
         res.send(account);
     }
