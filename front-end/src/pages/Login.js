@@ -45,10 +45,12 @@ function Login(props) {
   useEffect(() => {
     async function fetchData() {
       // mockaroo api
-      const result = await axios(
-        "https://my.api.mockaroo.com/login?key=52caca70"
-      );
+      // const result = await axios(
+      //   "https://my.api.mockaroo.com/login?key=52caca70"
+      // );
+      const result = await axios("/login?username=lyaacoby&password=lianne");
       setData(result.data);
+      console.log(result.data);
     }
     fetchData();
   }, []);
