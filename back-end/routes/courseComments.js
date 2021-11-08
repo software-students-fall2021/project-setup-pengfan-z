@@ -15,6 +15,7 @@ courseCommentsRouter.get("/:courseId", async (req, res, next) => {
       .catch((err) => next(err));
 });
 
+courseCommentsRouter.post()
 courseCommentsRouter.use((error, req, res, next) => {
     res.status(error.httpStatusCode).send(`Error: ${error.message}`);
 });
