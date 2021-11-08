@@ -7,6 +7,7 @@ const morgan = require("morgan"); // middleware for nice logging of incoming HTT
 const { majorsRouter } = require("./routes/majors");
 const { coursesRouter} = require("./routes/courses");
 const { courseCommentsRouter } = require("./routes/courseComments");
+const { courseinfoRouter } = require("./routes/courseinfo");
 
 // use the morgan middleware to log all incoming http requests
 app.use(morgan("dev")); // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -28,6 +29,8 @@ app.use("/courses", coursesRouter);
 app.use("/comments", courseCommentsRouter);
 
 app.use("/login", loginRouter);
+
+app.use("/courseinfo", courseinfoRouter);
 
 // start by calling nodemon server
 

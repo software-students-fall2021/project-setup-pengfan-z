@@ -7,8 +7,7 @@ const Contact = (props) => {
     
 
     return (
-        <div>
-        
+        <div class="row mt-2">
         
 
         <Container fluid className = "form justify-content-top">
@@ -21,24 +20,25 @@ const Contact = (props) => {
 
 
             <Row>
-            <Col>
+            <Col className='d-flex justify-content-center align-items-center'>
+
                 <input
                 type='text'
                 className='input'>
 
                 </input>
+
             </Col>
             </Row>
             
             <Row>
-            <Col>
+            <Col className='d-flex justify-content-center align-items-center'>
 
                 <Button
                 variant= 'primary'
                 >
                 Submit
                 </Button>
-
 
             </Col>
             </Row>
