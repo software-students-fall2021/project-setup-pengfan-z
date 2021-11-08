@@ -1,5 +1,5 @@
-const { Router } = require("express");
-const axios = require("axios");
+const { Router } = require('express');
+const axios = require('axios');
 
 const majorsRouter = Router();
 
@@ -8,10 +8,10 @@ const majorsRouter = Router();
 // Output: objects with subject code as keys and subject names as values
 // Example Input: http://localhost:5000/majors/UA => accessing majors in undergrad cas
 
-majorsRouter.get("/:schoolId", (req, res, next) => {
+majorsRouter.get('/:schoolId', (req, res, next) => {
   const schoolId = req.params.schoolId;
   axios
-    .get("https://schedge.a1liu.com/subjects")
+    .get('https://schedge.a1liu.com/subjects')
     .then((response) => {
       const allMajors = response.data;
       if (allMajors.hasOwnProperty(schoolId)) {
