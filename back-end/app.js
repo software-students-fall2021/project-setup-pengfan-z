@@ -27,6 +27,8 @@ app.use("/courses", coursesRouter);
 
 app.use("/comments", courseCommentsRouter);
 
+app.use("/login", loginRouter);
+
 // start by calling nodemon server
 
 module.exports = app;
