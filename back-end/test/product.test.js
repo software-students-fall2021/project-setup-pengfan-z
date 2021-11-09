@@ -51,6 +51,29 @@ describe('/First Test Collection', () => {
       });
   });
 
+  it('test /courses route', (done) => {
+    chai
+      .request(server)
+      .get('/courses/UA/CSCI')
+      .end((err, res) => {
+        res.should.have.status(200);
+        const actual = res.body[0].name;
+        const expected = 'Introduction to Computer Programming (Limited Prior Experience)';
+        expect(actual).to.be.equal(expected);
+        done();
+      });
+  });
+
+  it('test /courses route error handling', (done) => {
+    chai
+      .request(server)
+      .get('/courses/UA/ihniodqw')
+      .end((err, res) => {
+        res.should.have.status(500);
+        done();
+      });
+  });
+
   // hello world test
   //   it('should test two values', () => {
   //     // actual test content in here
