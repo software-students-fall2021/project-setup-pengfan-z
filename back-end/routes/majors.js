@@ -9,18 +9,18 @@ const majorsRouter = Router();
 // Example Input: http://localhost:5000/majors/UA => accessing majors in undergrad cas
 
 majorsRouter.get('/:schoolId', (req, res, next) => {
-  const schoolId = req.params.schoolId;
+  const { schoolId } = req.params;
   axios
     .get('https://schedge.a1liu.com/subjects')
     .then((response) => {
       const allMajors = response.data;
-      if (allMajors.hasOwnProperty(schoolId)) {
-        //TODO
+      if (Object.prototype.hasOwnProperty.call(allMajors, schoolId)) {
+        // TODO
         const majorsList = allMajors[schoolId];
         res.json(majorsList);
       } else {
         const error = new Error(`The school id ${schoolId} does not exist`);
-        error.httpStatusCode = 400;
+        error.code = 400;
         throw error;
       }
     })
@@ -30,9 +30,9 @@ majorsRouter.get('/:schoolId', (req, res, next) => {
   // res.send(allMajors);
 });
 
-//error handling
-majorsRouter.use((error, req, res, next) => {
-  res.status(error.httpStatusCode).send(`Error: ${error.message}`);
+// error handling
+majorsRouter.use((error, req, res) => {
+  res.status(error.code).json(`Error: ${error.message}`);
 });
 
 module.exports = {
