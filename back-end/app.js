@@ -1,7 +1,8 @@
 const express = require('express');
+
 const app = express();
-const path = require('path');
-const axios = require('axios'); // middleware for making requests to APIs
+// const path = require('path');
+// const axios = require('axios'); // middleware for making requests to APIs
 const morgan = require('morgan'); // middleware for nice logging of incoming HTTP requests
 
 const { majorsRouter } = require('./routes/majors');
@@ -20,7 +21,7 @@ app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming 
 // app.use("/static", express.static("public"))
 
 app.get('/', (req, res) => {
-  res.send('Hello World.');
+  res.json('Hello World.');
 });
 
 app.use('/majors', majorsRouter);
