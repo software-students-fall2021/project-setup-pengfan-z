@@ -1,12 +1,12 @@
-const { Router } = require("express");
-const axios = require("axios");
+const { Router } = require('express');
+const axios = require('axios');
 
 const courseinfoRouter = Router();
 
-courseinfoRouter.get("/:courseId", (req, res, next) => {
+courseinfoRouter.get('/:courseId', (req, res, next) => {
   const courseId = req.params.courseId;
   axios
-    .get("https://my.api.mockaroo.com/courseid.js?key=cc3f9050")
+    .get('https://my.api.mockaroo.com/courseid.js?key=cc3f9050')
     .then((response) => {
       const courseinfo = response.data;
       res.json(courseinfo);
