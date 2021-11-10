@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams, useHistory, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -52,6 +52,14 @@ const CourseInfo = () => {
     return day;
   };
 
+  const getEndTime = (time, duration) => {
+    let hour = parseInt(time.substring(0, 2));
+    let minute = parseInt(time.substring(3, 5));
+    hour += Math.floor(duration / 60);
+    minute += duration % 60;
+    return `${hour.toString()}:${minute.toString()}`;
+  };
+
   useEffect(() => {
     getCourseInfo();
   }, []);
@@ -102,11 +110,8 @@ const CourseInfo = () => {
           <Row>
             <Col>
               <p className='text-start'>
-                Status: {courseInfo.status ? "Open" : "Closed"}
+                Average Rating: {courseInfo.avgRating}
               </p>
-            </Col>
-            <Col>
-              <p className='text-end'>Rating: {courseInfo.avgRating}</p>
             </Col>
           </Row>
           <Row className='text-center comment-divider'>
@@ -115,26 +120,47 @@ const CourseInfo = () => {
             </Col>
           </Row>
           {courseInfo.sections.map((section) => (
-            <Row key={section.registrationNumber}>
+            <Row className='comment-divider' key={section.registrationNumber}>
+              <Col xs='12'>Name: {section.name}</Col>
               <Col xs='12'>Section: {section.code}</Col>
               <Col xs='12'>
                 Instructor:{" "}
-                {section.instructors.map((instructor) => (
-                  <span key={instructor}>{instructor + " "}</span>
+                {section.instructors.map((instructor, index) => (
+                  <span key={instructor}>
+                    {instructor}
+                    {index === section.instructors.length - 1 ? " " : ", "}
+                  </span>
                 ))}
               </Col>
               <Col xs='12'>Location: {section.location}</Col>
               <Col xs='12'>Instruction Mode: {section.instructionMode}</Col>
               <Col xs='12'>Units: {section.maxUnits}</Col>
               <Col xs='12'>
-                Dates: {section.meetings[0].beginDate.substring(0, 11)} -{" "}
-                {section.meetings[0].endDate.substring(0, 11)}
+                Dates: {section.meetings[0].beginDate.substring(0, 10)} -{" "}
+                {section.meetings[0].endDate.substring(0, 10)}
               </Col>
               <Col xs='12'>
-                Meets: {getDay(section.meetings[0].beginDate.substring(0, 11))}{" "}
+                Meets: {getDay(section.meetings[0].beginDate.substring(0, 10))}{" "}
                 {section.meetings.length > 1
-                  ? getDay(section.meetings[1].beginDate.substring(0, 11))
-                  : ""}
+                  ? getDay(section.meetings[1].beginDate.substring(0, 10))
+                  : ""}{" "}
+                {section.meetings[0].beginDate.substring(11, 16)} -{" "}
+                {getEndTime(
+                  section.meetings[0].beginDate.substring(11, 16),
+                  section.meetings[0].minutesDuration
+                )}
+              </Col>
+              <Col xs='12'>
+                Status:{" "}
+                {section.status === "WaitList"
+                  ? section.waitlistTotal
+                  : section.status}
+              </Col>
+              <Col className='text-start' xs='6'>
+                <Button variant='link'>Add to Cart</Button>
+              </Col>
+              <Col className='text-end' xs='6'>
+                <Button variant='link'>Comment</Button>
               </Col>
             </Row>
           ))}
