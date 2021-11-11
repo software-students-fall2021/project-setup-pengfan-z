@@ -74,6 +74,29 @@ describe('/First Test Collection', () => {
       });
   });
 
+  it('test /comments route', (done) => {
+    chai
+      .request(server)
+      .get('/comments/UA/CSCI/480')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('array');
+        res.body[0].comment.should.be.a('string');
+        done();
+      });
+  });
+
+  // not implemented yet
+  it.skip('test /comments route error handling', (done) => {
+    chai
+      .request(server)
+      .get('/comments/UA/CSCI/999')
+      .end((err, res) => {
+        res.should.have.status(400);
+        done();
+      });
+  });
+
   // hello world test
   //   it('should test two values', () => {
   //     // actual test content in here

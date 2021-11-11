@@ -28,7 +28,7 @@ const CourseInfo = () => {
 
     console.log(data);
 
-    response = await axios(`/comments/${courseId}`);
+    response = await axios(`/comments/${schoolId}/${subjectId}/${courseId}`);
     data.userReviews = response.data;
     data.avgRating = 0;
     if (data.userReviews.length > 0) {

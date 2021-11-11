@@ -8,9 +8,9 @@ const courseCommentsRouter = Router();
 // Just a placeholder to simulate importing the Courses database
 // const { Course } = db;
 
-courseCommentsRouter.get('/:courseId', async (req, res, next) => {
-  const { courseId } = req.params;
-  // TODO: use courseId to get comments from mongodb databases
+courseCommentsRouter.get('/:schoolId/:subjectId/:courseId', async (req, res, next) => {
+  const { schoolId, subjectId, courseId } = req.params;
+  // TODO: get comments from mongodb databases
   axios
     .get('https://my.api.mockaroo.com/user_review.json?key=eccb0b30')
     .then((response) => {
