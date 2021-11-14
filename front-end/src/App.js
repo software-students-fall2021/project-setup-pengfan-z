@@ -13,6 +13,7 @@ import { useState } from "react";
 import Majors from "./pages/Majors";
 import "./css/app.css";
 import Courses from "./pages/Courses";
+import Test from "./components/Test";
 
 function App() {
   const [loginState, setLoginState] = useState({
@@ -55,6 +56,10 @@ function App() {
 
           <Route path='/contact'>
             <Contact />
+          </Route>
+
+          <Route path='/test'>
+            <Test />
           </Route>
 
           <Route path='/'>

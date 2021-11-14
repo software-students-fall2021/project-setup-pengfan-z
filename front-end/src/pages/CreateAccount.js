@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Container, Row, Col, Alert, Form } from "react-bootstrap";
+import axios from "axios";
 import "../css/createAccount.css";
 
 const CreateAccount = () => {
@@ -9,7 +10,7 @@ const CreateAccount = () => {
   const [alert, setAlert] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (newPassword !== repeatedPassword) {
       setAlert(
         "Your reentered passwords does not match your original passwords."
@@ -24,6 +25,21 @@ const CreateAccount = () => {
       setShowAlert(true);
     } else {
       setShowAlert(false);
+      axios
+        .post("/user/register", {
+          username: newUserName,
+          password: newPassword,
+        })
+        .then((res) => {
+          console.log(res);
+          const token = res.data.token;
+          localStorage.setItem("JWT_TOKEN", token);
+        })
+        .catch((err) => {
+          console.log(err);
+          setShowAlert(true);
+          setAlert(err.message);
+        });
     }
   };
 
