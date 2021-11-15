@@ -13,21 +13,43 @@ function Login(props) {
   const [data, setData] = useState([]);
   const [isValid, setIsValid] = useState(false);
 
-  const handleLogin = () => {
-    console.log(data);
+ // const handleLogin = () => {
+  const handleLogin = async e => {
+
     if (username === "" || password === "") {
       setAlert("Every field is required.");
       setShowAlert(true);
-    } else if (!authentication()) {
-      setAlert("Account or password is wrong.");
-      setShowAlert(true);
-    } else {
-      console.log(`Username: ${username}; Password: ${password}`);
-      // Should redirect to account page
-      setIsValid(true);
+    } 
+    else {
+      try{
+        const requestData =  {
+  
+          username,
+          password,
+          
+        }
+        const response = await axios.post("/login", requestData);
+        console.log(response.data)
+        if (response.data.response ===false){
+         // setData(response.data)
+          setAlert("Account or password is wrong.");
+          setShowAlert(true);
+        }
+        else{
+         // setData(response.data)
+          setAlert("Success!");
+          setShowAlert(true);
+          setIsValid(true);
+        }
+      }
+      catch(err){
+        throw new Error(err)
+      }
+      
+  
     }
   };
-
+/*
   const authentication = () => {
     for (let i = 0; i < data.length; i++) {
       if (data[i].account === username) {
@@ -41,6 +63,45 @@ function Login(props) {
     }
     return false;
   };
+  */
+  useEffect(() => {
+    // if the login was a success, call the setuser function that was passed to this component as a prop
+    if (data.success) {
+      //console.log(`User successfully logged in: ${data.username}`)
+      props.setuser(data)
+    }
+
+  }, [data])
+  /*
+
+  const authentication = async e => {
+
+    try{
+      const requestData =  {
+
+        username,
+        password,
+        
+      }
+      const response = await axios.post("/login", requestData);
+      console.log(response.data)
+      if (response.data =='False'){
+        setData(response.data)
+        return false;
+      }
+      else{
+        setData(response.data)
+        return true;
+      }
+
+    }
+    catch(err){
+      throw new Error(err)
+    }
+
+  };
+  */
+  /*
 
   useEffect(() => {
     async function fetchData() {
@@ -54,6 +115,7 @@ function Login(props) {
     }
     fetchData();
   }, []);
+  */
 
   if (isValid) {
     props.SetLoginState({ name: username, path: "/user" });
