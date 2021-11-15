@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router";
 
-const Test = (props) => {
+const Auth = () => {
   let history = useHistory();
 
   useEffect(() => {
@@ -21,11 +21,7 @@ const Test = (props) => {
       });
   }, []);
 
-  return (
-    <div>
-      <h1>secret route</h1>
-    </div>
-  );
+  return <div>{/* <h1>secret route</h1> */}</div>;
 };
 
-export default Test;
+export default Auth;

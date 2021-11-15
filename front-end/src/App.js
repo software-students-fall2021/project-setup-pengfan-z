@@ -13,7 +13,7 @@ import { useState } from "react";
 import Majors from "./pages/Majors";
 import "./css/app.css";
 import Courses from "./pages/Courses";
-import Test from "./components/Test";
+// import Auth from "./components/Auth";
 
 function App() {
   const [loginState, setLoginState] = useState({
@@ -37,6 +37,7 @@ function App() {
           </Route>
 
           <Route path='/user'>
+            {/* <Auth /> */}
             <User />
           </Route>
 
@@ -56,10 +57,6 @@ function App() {
 
           <Route path='/contact'>
             <Contact />
-          </Route>
-
-          <Route path='/test'>
-            <Test />
           </Route>
 
           <Route path='/'>
