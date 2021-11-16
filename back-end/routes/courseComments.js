@@ -30,6 +30,7 @@ courseCommentsRouter.post('/:courseId', async(req, res, next) => {
     Course.find({ courseId: id })
         .then((currCourse) => {
             currCourse.comments.push(comment);
+            await currCourse.save();
             res.redirect('/:courseId');
         })
         .catch((err) => next(err));
