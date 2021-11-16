@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
-import Header from "../components/Header";
 import React, { Component } from "react";
 import "../css/user.css";
 

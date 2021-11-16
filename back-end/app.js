@@ -1,7 +1,8 @@
 const express = require('express');
+
 const app = express();
-const path = require('path');
-const axios = require('axios'); // middleware for making requests to APIs
+// const path = require('path');
+// const axios = require('axios'); // middleware for making requests to APIs
 const morgan = require('morgan'); // middleware for nice logging of incoming HTTP requests
 
 const { majorsRouter } = require('./routes/majors');
@@ -9,6 +10,7 @@ const { coursesRouter } = require('./routes/courses');
 const { courseCommentsRouter } = require('./routes/courseComments');
 const { courseinfoRouter } = require('./routes/courseinfo');
 const { loginRouter } = require('./routes/login');
+const { userRouter } = require('./routes/user');
 
 // use the morgan middleware to log all incoming http requests
 app.use(morgan('dev')); // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -20,7 +22,7 @@ app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming 
 // app.use("/static", express.static("public"))
 
 app.get('/', (req, res) => {
-  res.send('Hello World.');
+  res.json('Hello World.');
 });
 
 app.use('/majors', majorsRouter);
@@ -32,6 +34,8 @@ app.use('/comments', courseCommentsRouter);
 app.use('/login', loginRouter);
 
 app.use('/courseinfo', courseinfoRouter);
+
+app.use('/user', userRouter);
 
 // start by calling nodemon server
 
