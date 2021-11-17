@@ -7,6 +7,7 @@ import { render } from "@testing-library/react";
 import { Link } from "react-router-dom";
 /* React JS table code taken from: https://dev.to/abdulbasit313/an-easy-way-to-create-a-customize-dynamic-table-in-react-js-3igg */
 
+// TODO: get user portal info from server, display comments under courses
 class User extends Component {
   constructor(props) {
     super(props);
