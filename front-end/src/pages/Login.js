@@ -28,94 +28,38 @@ function Login(props) {
           password,
           
         }
-        const response = await axios.post("/login", requestData);
+        const response = await axios.post("/user/login", requestData);
         console.log(response.data)
-        if (response.data.response ===false){
-         // setData(response.data)
-          setAlert("Account or password is wrong.");
-          setShowAlert(true);
-        }
-        else{
-         // setData(response.data)
+        
+       
+          setData(response.data)
           setAlert("Success!");
           setShowAlert(true);
           setIsValid(true);
-        }
+        
       }
       catch(err){
-        throw new Error(err)
+        console.log(err.message, err.name);
+        setAlert("Account or password is wrong.");
+        setShowAlert(true);
+        //throw new Error(err)
       }
       
   
     }
   };
-/*
-  const authentication = () => {
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].account === username) {
-        if (data[i].password === password) {
-          console.log(password);
-          console.log(data[i].password);
-          return true;
-        }
-        return false;
-      }
-    }
-    return false;
-  };
-  */
+
   useEffect(() => {
     // if the login was a success, call the setuser function that was passed to this component as a prop
-    if (data.success) {
+    if (data.token) {
+      // Store the token in local storage
+      localStorage.setItem('JWT_TOKEN', data.token);
       //console.log(`User successfully logged in: ${data.username}`)
-      props.setuser(data)
+      props.setUser(data.user)
     }
 
   }, [data])
-  /*
-
-  const authentication = async e => {
-
-    try{
-      const requestData =  {
-
-        username,
-        password,
-        
-      }
-      const response = await axios.post("/login", requestData);
-      console.log(response.data)
-      if (response.data =='False'){
-        setData(response.data)
-        return false;
-      }
-      else{
-        setData(response.data)
-        return true;
-      }
-
-    }
-    catch(err){
-      throw new Error(err)
-    }
-
-  };
-  */
-  /*
-
-  useEffect(() => {
-    async function fetchData() {
-      // mockaroo api
-      // const result = await axios(
-      //   "https://my.api.mockaroo.com/login?key=52caca70"
-      // );
-      const result = await axios("/login?username=lyaacoby&password=lianne");
-      setData(result.data);
-      console.log(result.data);
-    }
-    fetchData();
-  }, []);
-  */
+  
 
   if (isValid) {
     props.SetLoginState({ name: username, path: "/user" });

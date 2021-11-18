@@ -30,9 +30,15 @@ const Header = (props) => {
             </Link>
           </Navbar.Brand>
           <Navbar.Brand>
-            <Link to={props.LoginState.path} className='navLink'>
+            {
+              props.user === null ? <Link to="/login" className='navLink'>
+              Login
+            </Link> : 
+            <Link to='/user'>{props.user.username}</Link>
+            }
+            {/* <Link to={props.LoginState.path} className='navLink'>
               {props.LoginState.name}
-            </Link>
+            </Link> */}
           </Navbar.Brand>
         </Container>
       </Navbar>

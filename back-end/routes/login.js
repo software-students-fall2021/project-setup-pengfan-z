@@ -4,13 +4,11 @@ const loginRouter = Router();
 const e = require('express');
 const account = require('../public/teamPasswords.js');
 
+
 loginRouter.post('/', (req, res) => {
   let userName = req.body.username;
   let passWord = req.body.password;
-  // let storedUsername = account.accountName;
-  //console.log(storedUsername);
-  // for all objects in account, check accountNames and then passwords, then send res messages
-  //axios.get(url) async functions
+  
   const entries = Object.entries(account);
   //console.log(entries);
   for (item in entries) {
@@ -28,6 +26,7 @@ loginRouter.post('/', (req, res) => {
 
     //we need to capture accountName
   }
+  
   res.send({ response: false });
   /*  try{
         res.send(account);
