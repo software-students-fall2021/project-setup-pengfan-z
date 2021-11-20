@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+
 // This will be used when deployed on a hosting service where we point the hosting service to our Mongodb server
 // const uri = process.env.MONGODB_URI;
-
-// This should allow you to connect to the database from your local machines
-const uri =
-    'mongodb+srv://admin:situsari@cluster0.1qim7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+require('dotenv').config();
+const uri =process.env.MONGODB_URI;
 
 // Users contain a username, a hash, an array of References to course objects, and an array of references to comments
 const UserSchema = new mongoose.Schema({
