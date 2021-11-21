@@ -73,7 +73,8 @@ userRouter.post('/register', registerValidator(), async (req, res) => {
 
 userRouter.post('/signin', passport.authenticate('local', { session: false }), async (req, res) => {
   const token = signToken(req.user);
-  res.status(200).json({ token });
+  res.status(200).json({ token, user: req.user });
+  //returning user so that header login function is updated and front-end user-state is populated
 });
 
 userRouter.get('/secret', passport.authenticate('jwt', { session: false }), async (req, res) => {
@@ -85,27 +86,6 @@ userRouter.get('/secret', passport.authenticate('jwt', { session: false }), asyn
 // Grab the user's info based on the token
 userRouter.get('/me', passport.authenticate('jwt', { session: false }), async (req, res) => {
   res.json({ user: req.user });
-});
-
-userRouter.post('/login', async (req, res) => {
-  let userName = req.body.username;
-  let passWord = req.body.password;
-  // Find a user in the database with this particular username
-  const user = await User.findOne({username: userName});
-  if (!user) {
-    return res.status(401).json({message: 'Invalid username'});
-  }
-
-  // Check if valid password
-  const isValid = await user.isValidPassword(passWord);
-  if (!isValid) {
-    return res.status(401).json({message: 'Invalid password'});
-  }
-
-  // Generate token after username and password is validated
-  const token = signToken(user);
-  res.status(200).json({token, user});
-
 });
 
 

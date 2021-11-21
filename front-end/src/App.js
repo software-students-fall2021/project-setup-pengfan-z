@@ -50,7 +50,7 @@ function App() {
     <div className='App'>
       {/* Router for linking different pages */}
       <Router>
-        <Header user={user} LoginState={loginState} SetLoginState={setLoginState} />
+        <Header user={user} setUser={setUser} LoginState={loginState} SetLoginState={setLoginState} />
         <Switch>
           {/* Now type http://localhost:3000/login to go to the login page */}
           <Route path='/login'>
