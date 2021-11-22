@@ -73,12 +73,21 @@ userRouter.post('/register', registerValidator(), async (req, res) => {
 
 userRouter.post('/signin', passport.authenticate('local', { session: false }), async (req, res) => {
   const token = signToken(req.user);
-  res.status(200).json({ token });
+  res.status(200).json({ token, user: req.user });
+  //returning user so that header login function is updated and front-end user-state is populated
 });
 
 userRouter.get('/secret', passport.authenticate('jwt', { session: false }), async (req, res) => {
   console.log('secret route');
+  console.log('req', req);
   res.json({ message: 'secret route' });
 });
+
+// Grab the user's info based on the token
+userRouter.get('/me', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  res.json({ user: req.user });
+});
+
+
 
 module.exports = { userRouter };
