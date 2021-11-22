@@ -32,7 +32,7 @@ app.use('/courses', coursesRouter);
 
 app.use('/comments', courseCommentsRouter);
 
-app.use('/login', loginRouter);
+//app.use('/login', loginRouter);
 
 app.use('/courseinfo', courseinfoRouter);
 
