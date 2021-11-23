@@ -88,6 +88,4 @@ userRouter.get('/me', passport.authenticate('jwt', { session: false }), async (r
   res.json({ user: req.user });
 });
 
-
-
 module.exports = { userRouter };
