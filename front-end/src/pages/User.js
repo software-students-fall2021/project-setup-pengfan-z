@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Table, Button, Container, Row, Col } from "react-bootstrap";
 import React, { Component } from "react";
 import "../css/user.css";
 import axios from "axios";
@@ -10,7 +10,6 @@ import { render } from "@testing-library/react";
 import { Link } from "react-router-dom";
 /* React JS table code taken from: https://dev.to/abdulbasit313/an-easy-way-to-create-a-customize-dynamic-table-in-react-js-3igg */
 
-// TODO: get user portal info from server, display comments under courses
 // class User extends Component {
 //   constructor(props) {
 //     super(props);
@@ -54,15 +53,15 @@ import { Link } from "react-router-dom";
 //   render() {
 //     return (
 //       <div>
-//         <Container fluid className='form justify-content-center'>
-//           <h2 id='title'> Your Courses: </h2>
-//           <table id='courses'>
+//         <Container fluid className="form justify-content-center">
+//           <h2 id="title"> Your Courses: </h2>
+//           <table id="courses">
 //             <tbody>
 //               <tr> {this.renderTableHeader()}</tr>
 //               {this.renderTableData()}
 //             </tbody>
 //           </table>
-//           <h2 id='title'> Your Ratings: </h2>
+//           <h2 id="title"> Your Ratings: </h2>
 //           <table>
 //             <tr>
 //               <th>
@@ -90,20 +89,22 @@ import { Link } from "react-router-dom";
 //   }
 // }
 
-const User = () => {
+const User = (props) => {
   let history = useHistory();
   const [courses, setCourses] = useState();
+  const [comments, setComments] = useState();
 
   useEffect(() => {
     axios
-      .get("/userportal/yf123456", {
+      .get(`/userportal/${props.user.username}`, {
         headers: {
           Authorization: localStorage.getItem("JWT_TOKEN"),
         },
       })
       .then((res) => {
         console.log(res);
-        setCourses(res.data[0].comments);
+        setCourses(res.data[0].courses);
+        setComments(res.data[0].comments);
       })
       .catch((err) => {
         console.error(err.message);
@@ -111,7 +112,15 @@ const User = () => {
       });
   }, []);
 
-  return <div>{courses}</div>;
+  return (
+    <div>
+      <Container fluid>
+        <Row className="user">Hello! {props.user.username}</Row>
+        <Row className="course">Courses: {courses}</Row>
+        <Row className="comments">Comments: {comments}</Row>
+      </Container>
+    </div>
+  );
 };
 
 export default User;
