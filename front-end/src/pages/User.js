@@ -6,8 +6,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useHistory } from "react-router";
 
-import { render } from "@testing-library/react";
-import { Link } from "react-router-dom";
+// import { render } from "@testing-library/react";
+// import { Link } from "react-router-dom";
 /* React JS table code taken from: https://dev.to/abdulbasit313/an-easy-way-to-create-a-customize-dynamic-table-in-react-js-3igg */
 
 // class User extends Component {
@@ -93,34 +93,44 @@ const User = (props) => {
   let history = useHistory();
   const [courses, setCourses] = useState();
   const [comments, setComments] = useState();
+  const [isValidated, setIsValidated] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`/userportal/${props.user.username}`, {
-        headers: {
-          Authorization: localStorage.getItem("JWT_TOKEN"),
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        setCourses(res.data[0].courses);
-        setComments(res.data[0].comments);
-      })
-      .catch((err) => {
-        console.error(err.message);
-        history.push("/");
-      });
+    // TODO: need to change the endpoint to the username
+    if (props.user === null) {
+      history.push("/login");
+    } else {
+      axios
+        .get(`/userportal/${props.user.username}`, {
+          headers: {
+            Authorization: localStorage.getItem("JWT_TOKEN"),
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          // TODO: Also need to change in the future to store array instead
+          setCourses(res.data[0].courses);
+          setComments(res.data[0].comments);
+          setIsValidated(true);
+        })
+        .catch((err) => {
+          console.error(err.message);
+          history.push("/login");
+        });
+    }
   }, []);
 
-  return (
-    <div>
+  if (isValidated) {
+    return (
       <Container fluid>
-        <Row className="user">Hello! {props.user.username}</Row>
-        <Row className="course">Courses: {courses}</Row>
-        <Row className="comments">Comments: {comments}</Row>
+        <Row className='user'>Hello! {props.user.username}</Row>
+        <Row className='course'>Courses: {courses}</Row>
+        <Row className='comments'>Comments: {comments}</Row>
       </Container>
-    </div>
-  );
+    );
+  } else {
+    return <div></div>;
+  }
 };
 
 export default User;

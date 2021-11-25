@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Button, Container, Row, Col, Alert, Form } from "react-bootstrap";
 import axios from "axios";
 import "../css/createAccount.css";
+import { useHistory } from "react-router";
 
-const CreateAccount = () => {
+const CreateAccount = (props) => {
+  let history = useHistory();
   const [newUserName, setUserName] = useState("");
   const [newPassword, setPassWord] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
@@ -34,6 +36,8 @@ const CreateAccount = () => {
           console.log(res);
           const token = res.data.token;
           localStorage.setItem("JWT_TOKEN", token);
+          props.setUser(res.data.user);
+          history.push(`/user/${newUserName}`);
         })
         .catch((err) => {
           console.log(err);

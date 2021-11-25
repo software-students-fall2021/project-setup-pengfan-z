@@ -50,7 +50,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className='App'>
       {/* Router for linking different pages */}
       <Router>
         <Header
@@ -61,7 +61,7 @@ function App() {
         />
         <Switch>
           {/* Now type http://localhost:3000/login to go to the login page */}
-          <Route path="/login">
+          <Route path='/login'>
             <Login
               setUser={setUser}
               LoginState={loginState}
@@ -69,34 +69,33 @@ function App() {
             />
           </Route>
 
-          <Route path="/create-account">
-            <CreateAccount />
+          <Route path='/create-account'>
+            <CreateAccount setUser={setUser} />
           </Route>
 
-          <Route path="/user">
-            {/* <Auth /> */}
+          <Route path='/user'>
             <User user={user} />
           </Route>
 
-          <Route exact path="/school/:schoolId" component={Majors} />
+          <Route exact path='/school/:schoolId' component={Majors} />
 
           <Route
             exact
-            path="/school/:schoolId/:subjectId"
+            path='/school/:schoolId/:subjectId'
             component={Courses}
           />
 
-          <Route path="/school/:schoolId/:subjectId/:courseId">
+          <Route path='/school/:schoolId/:subjectId/:courseId'>
             <CourseInfo />
           </Route>
 
-          <Route path="/school/:schoolId" component={Majors} />
+          <Route path='/school/:schoolId' component={Majors} />
 
-          <Route path="/contact">
+          <Route path='/contact'>
             <Contact />
           </Route>
 
-          <Route path="/">
+          <Route path='/'>
             <Home />
           </Route>
         </Switch>
