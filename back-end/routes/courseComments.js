@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const axios = require('axios');
 // Added as it is required for database intergration
-const { Course } = require('../db');
+const { Course, User } = require('../db');
 
 const courseCommentsRouter = Router();
 
@@ -20,20 +20,29 @@ courseCommentsRouter.get('/:schoolId/:subjectId/:courseId', async (req, res, nex
         .catch((err) => next(err));
 });
 
-courseCommentsRouter.post('/:courseId', async (req, res, next) => {
+courseCommentsRouter.post('/:courseId/:userId', async(req, res, next) => {
     // const { courseId } = req.params;
 
-    const id = req.params;
+    const { courseId, userId } = req.params;
+
     const { comment } = req.body;
     // TODO: This creating and adding a comment to a Course record which may change based on how the schema is implemented in the database
     // Check that this relationship works
-    Course.find({ courseId: id })
+    Course.find({ courseId })
         .then((currCourse) => {
             currCourse.comments.push(comment);
             currCourse.save();
+        })
+        .catch((err) => next(err));
+    User.find({ userId })
+        .then((currUser) => {
+            currUser.comments.push(comment);
+            currUser.courses.push(courseId);
+            currUser.save();
             res.redirect('/:courseId');
         })
         .catch((err) => next(err));
+
 });
 courseCommentsRouter.use((error, req, res, next) => {
     res.status(error.httpStatusCode).send(`Error: ${error.message}`);
