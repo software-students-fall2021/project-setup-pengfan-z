@@ -5,8 +5,7 @@ const { Course, User } = require('../db');
 
 const courseCommentsRouter = Router();
 
-// Just a placeholder to simulate importing the Courses database
-// const { Course } = db;
+// TODO: Add authentication
 
 courseCommentsRouter.get('/:schoolId/:subjectId/:courseId', async (req, res, next) => {
     const { schoolId, subjectId, courseId } = req.params;
@@ -20,7 +19,7 @@ courseCommentsRouter.get('/:schoolId/:subjectId/:courseId', async (req, res, nex
         .catch((err) => next(err));
 });
 
-courseCommentsRouter.post('/:courseId/:userId', async (req, res, next) => {
+courseCommentsRouter.post('/:courseId/:userId', async (req, res) => {
     // const { courseId } = req.params;
 
     const { courseId, userId } = req.params;
@@ -30,39 +29,43 @@ courseCommentsRouter.post('/:courseId/:userId', async (req, res, next) => {
     // TODO: This creating and adding a comment to a Course record which may change based on how the schema is implemented in the database
     // Check that this relationship works
 
-    const foundUser = await User.findOne({ username: userId });
-    console.log(foundUser);
-    if (foundUser) {
-        foundUser.comments.push(comment);
-        foundUser.courses.push(courseId);
-        await foundUser.save();
-    } else {
-        return res.status(403).json({ message: 'Unauthorized' });
-    }
-    // User.find({ userId })
-    //     .then((currUser) => {
-    //         currUser.comments.push(comment);
-    //         currUser.courses.push(courseId);
-    //         currUser.save();
-    //         res.redirect('/:courseId');
-    //     })
-    //     .catch((err) => next(err));
+    User.findOneAndUpdate(
+        { username: userId },
+        { $push: { comments: comment } },
+        (error, success) => {
+            if (error) {
+                console.log(error);
+                return res.status(403).json({ message: 'Unauthorized' });
+            }
+
+            console.log(success);
+        }
+    );
 
     const foundCourse = await Course.findOne({ courseId });
-    if (foundCourse) {
-        foundCourse.comments.push(comment);
-        await foundCourse.save();
-    } else {
+    if (!foundCourse) {
         const newCourse = new Course({
             courseId,
             comments: [comment],
         });
         await newCourse.save();
+    } else {
+        Course.findOneAndUpdate(
+            { courseId },
+            { $push: { comments: comment } },
+            (error, success) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(success);
+                }
+            }
+        );
     }
 
     res.json({ message: 'success' });
 });
-courseCommentsRouter.use((error, req, res, next) => {
+courseCommentsRouter.use((error, req, res) => {
     res.status(400).send(`Error: ${error.message}`);
 });
 

@@ -124,8 +124,8 @@ const User = (props) => {
     return (
       <Container fluid>
         <Row className='user'>Hello! {props.user.username}</Row>
-        <Row className='course'>Courses: {courses}</Row>
-        <Row className='comments'>Comments: {comments}</Row>
+        {/* <Row className='course'>Courses: {courses}</Row>
+        <Row className='comments'>Comments: {comments}</Row> */}
       </Container>
     );
   } else {

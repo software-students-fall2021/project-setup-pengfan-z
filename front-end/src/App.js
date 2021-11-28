@@ -86,7 +86,7 @@ function App() {
           />
 
           <Route path='/school/:schoolId/:subjectId/:courseId'>
-            <CourseInfo />
+            <CourseInfo user={user} />
           </Route>
 
           <Route path='/school/:schoolId' component={Majors} />
