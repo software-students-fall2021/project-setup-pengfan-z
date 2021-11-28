@@ -82,19 +82,6 @@ const CourseInfo = (props) => {
       history.push("/login");
     } else {
       setShow(true);
-      // axios
-      //   .post(`/comments/${courseId}/${userId}`, {
-      //     comment: {
-      //       rating: "4",
-      //       comment: "Love this course",
-      //     },
-      //   })
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //   });
     }
   };
 
