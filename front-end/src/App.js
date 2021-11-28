@@ -1,5 +1,10 @@
 // import logo from "./logo.svg";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
 import Login from "./pages/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
@@ -9,36 +14,67 @@ import CreateAccount from "./pages/CreateAccount";
 import CourseInfo from "./pages/CourseInfo";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Majors from "./pages/Majors";
 import "./css/app.css";
 import Courses from "./pages/Courses";
+import axios from "axios";
 // import Auth from "./components/Auth";
 
 function App() {
+  const history = useHistory();
   const [loginState, setLoginState] = useState({
     name: "Login",
     path: "/login",
   });
 
+  const [user, setUser] = useState(null);
+  // If the user has a token, make sure that they stay logged in
+  useEffect(() => {
+    const token = localStorage.getItem("JWT_TOKEN");
+    if (token) {
+      axios
+        .get("/user/me", {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((res) => {
+          setUser(res.data.user);
+        })
+        .catch((err) => {
+          console.error(err.message);
+          history.push("/");
+        });
+    }
+  }, []);
+
   return (
     <div className='App'>
       {/* Router for linking different pages */}
       <Router>
-        <Header LoginState={loginState} SetLoginState={setLoginState} />
+        <Header
+          user={user}
+          setUser={setUser}
+          LoginState={loginState}
+          SetLoginState={setLoginState}
+        />
         <Switch>
           {/* Now type http://localhost:3000/login to go to the login page */}
           <Route path='/login'>
-            <Login LoginState={loginState} SetLoginState={setLoginState} />
+            <Login
+              setUser={setUser}
+              LoginState={loginState}
+              SetLoginState={setLoginState}
+            />
           </Route>
 
           <Route path='/create-account'>
-            <CreateAccount />
+            <CreateAccount setUser={setUser} />
           </Route>
 
           <Route path='/user'>
-            {/* <Auth /> */}
-            <User />
+            <User user={user} />
           </Route>
 
           <Route exact path='/school/:schoolId' component={Majors} />

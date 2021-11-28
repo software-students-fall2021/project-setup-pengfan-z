@@ -1,32 +1,37 @@
 .form {
-    max-width: 50%;
-    /* min-width: 50%; */
-  }
-  
-#title{
-    padding-top: 25px;
+  max-width: 50%;
+  /* min-width: 50%; */
+}
+
+#title {
+  padding-top: 25px;
 }
 #courses {
-    text-align: center;
-    border-collapse: collapse;
-    border: 3px solid #ddd;
-    max-width: 50%;
-
+  text-align: center;
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  max-width: 50%;
 }
 
-#courses td, students th{
-    border: 1px solid #ddd;
-    padding: 8px; 
+#courses td,
+students th {
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
-
-#courses th{
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color: #c67aff
-
+#courses th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #c67aff;
 }
 img {
-    float: right;
-  }
+  float: right;
+}
+
+.user {
+  padding-top: 25px;
+  padding-left: 25px;
+  text-decoration: underline;
+  font-size: 40px;
+}

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+
 // This will be used when deployed on a hosting service where we point the hosting service to our Mongodb server
 // const uri = process.env.MONGODB_URI;
+require('dotenv').config();
 
-// This should allow you to connect to the database from your local machines
-const uri =
-    'mongodb+srv://admin:situsari@cluster0.1qim7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const uri = process.env.MONGODB_URI;
 
 // Users contain a username, a hash, an array of References to course objects, and an array of references to comments
 const UserSchema = new mongoose.Schema({
@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
     courses: Array,
 });
 
-UserSchema.pre('save', async function(next) {
+UserSchema.pre('save', async function (next) {
     try {
         // generate a salt
         const salt = await bcrypt.genSalt(10);
@@ -38,7 +38,7 @@ UserSchema.pre('save', async function(next) {
     }
 });
 
-UserSchema.methods.isValidPassword = async function(newPassword) {
+UserSchema.methods.isValidPassword = async function (newPassword) {
     try {
         return await bcrypt.compare(newPassword, this.hash);
     } catch (error) {
@@ -50,11 +50,13 @@ UserSchema.methods.isValidPassword = async function(newPassword) {
 const CourseSchema = new mongoose.Schema({
     name: String,
     courseId: Number,
-    comments: [{
-        rating: String,
-        comment: String,
-        commenter: String,
-    }, ],
+    comments: [
+        {
+            rating: String,
+            comment: String,
+            commenter: String,
+        },
+    ],
 });
 const Course = mongoose.model('Course', CourseSchema);
 const User = mongoose.model('User', UserSchema);

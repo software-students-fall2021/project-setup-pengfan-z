@@ -153,7 +153,7 @@ const CourseInfo = () => {
               <Col xs='12'>
                 Status:{" "}
                 {section.status === "WaitList"
-                  ? section.waitlistTotal
+                  ? `Waitlist: ${section.waitlistTotal}`
                   : section.status}
               </Col>
               <Col className='text-start' xs='6'>

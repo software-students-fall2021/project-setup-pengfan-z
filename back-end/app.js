@@ -11,6 +11,7 @@ const { courseCommentsRouter } = require('./routes/courseComments');
 const { courseinfoRouter } = require('./routes/courseinfo');
 const { loginRouter } = require('./routes/login');
 const { userRouter } = require('./routes/user');
+const { userPortalRouter } = require('./routes/userportal');
 
 // use the morgan middleware to log all incoming http requests
 app.use(morgan('dev')); // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -31,11 +32,13 @@ app.use('/courses', coursesRouter);
 
 app.use('/comments', courseCommentsRouter);
 
-app.use('/login', loginRouter);
+//app.use('/login', loginRouter);
 
 app.use('/courseinfo', courseinfoRouter);
 
 app.use('/user', userRouter);
+
+app.use('/userportal', userPortalRouter);
 
 // start by calling nodemon server
 
