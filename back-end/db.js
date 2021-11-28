@@ -48,8 +48,8 @@ UserSchema.methods.isValidPassword = async function (newPassword) {
 
 // Courses contain the name of the course and an array of comments which contain a rating, a comment, and the name of the commenter
 const CourseSchema = new mongoose.Schema({
-    name: String,
-    courseId: Number,
+    // name: String,
+    courseId: String,
     comments: [
         {
             rating: String,
