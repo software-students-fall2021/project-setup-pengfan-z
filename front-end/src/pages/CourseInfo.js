@@ -131,6 +131,7 @@ const CourseInfo = (props) => {
     if (description.length > 70 && showMore) {
       return (
         <p>
+          {/* eslint-disable-next-line */}
           <a onClick={() => setShowMore(false)}>
             Description: {description} <i>Show less</i>
           </a>
@@ -140,6 +141,7 @@ const CourseInfo = (props) => {
     if (description.length > 70) {
       return (
         <p>
+          {/* eslint-disable-next-line */}
           <a onClick={() => setShowMore(true)}>
             Description: {description.slice(0, 70)} <i>...show more</i>
           </a>
