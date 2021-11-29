@@ -13,39 +13,30 @@ function Login(props) {
   const [data, setData] = useState([]);
   const [isValid, setIsValid] = useState(false);
 
- // const handleLogin = () => {
-  const handleLogin = async e => {
-
+  // const handleLogin = () => {
+  const handleLogin = async (e) => {
     if (username === "" || password === "") {
       setAlert("Every field is required.");
       setShowAlert(true);
-    } 
-    else {
-      try{
-        const requestData =  {
-  
+    } else {
+      try {
+        const requestData = {
           username,
           password,
-          
-        }
+        };
         const response = await axios.post("/user/signin", requestData);
-        console.log(response.data)
-        
-       
-          setData(response.data)
-          setAlert("Success!");
-          setShowAlert(true);
-          setIsValid(true);
-        
-      }
-      catch(err){
+        console.log(response.data);
+
+        setData(response.data);
+        setAlert("Success!");
+        setShowAlert(true);
+        setIsValid(true);
+      } catch (err) {
         console.log(err.message, err.name);
         setAlert("Account or password is wrong.");
         setShowAlert(true);
         //throw new Error(err)
       }
-      
-  
     }
   };
 
@@ -53,13 +44,12 @@ function Login(props) {
     // if the login was a success, call the setuser function that was passed to this component as a prop
     if (data.token) {
       // Store the token in local storage
-      localStorage.setItem('JWT_TOKEN', data.token);
+      localStorage.setItem("JWT_TOKEN", data.token);
       //console.log(`User successfully logged in: ${data.username}`)
-      props.setUser(data.user)
+      props.setUser(data.user);
     }
-
-  }, [data])
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   if (isValid) {
     props.SetLoginState({ name: username, path: "/user" });

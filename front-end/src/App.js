@@ -1,10 +1,5 @@
 // import logo from "./logo.svg";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
@@ -22,7 +17,7 @@ import axios from "axios";
 // import Auth from "./components/Auth";
 
 function App() {
-  let history = useHistory();
+  // let history = useHistory();
   const [loginState, setLoginState] = useState({
     name: "Login",
     path: "/login",
