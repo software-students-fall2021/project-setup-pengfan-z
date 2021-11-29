@@ -1,4 +1,3 @@
-const JWT = require('jsonwebtoken');
 const passport = require('passport');
 const { Router } = require('express');
 const { User } = require('../db');

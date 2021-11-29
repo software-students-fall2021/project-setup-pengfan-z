@@ -26,16 +26,28 @@ const AddComment = (props) => {
       //   }));
       const userId = props.user.username;
       axios
-        .post(`/comments/${props.courseId}/${userId}`, {
-          comment: {
-            rating: rating,
-            comment: text,
+        .post(
+          `/comments/${props.courseId}/${userId}`,
+          {
+            comment: {
+              rating: rating,
+              comment: text,
+            },
           },
-        })
+          {
+            headers: {
+              Authorization: localStorage.getItem("JWT_TOKEN"),
+            },
+          }
+        )
         .then((res) => {
+          setAlert("Succesfully add comment");
+          setShowAlert(true);
           console.log(res);
         })
         .catch((err) => {
+          setAlert("Failed to add comment");
+          setShowAlert(true);
           console.error(err);
         });
       props.handleClose();
@@ -45,7 +57,7 @@ const AddComment = (props) => {
   return (
     <>
       <Alert
-        variant="danger"
+        variant='primary'
         onClose={() => setShowAlert(false)}
         show={showAlert}
         dismissible
@@ -59,7 +71,7 @@ const AddComment = (props) => {
         <Modal.Body>
           <Form.Label>Comment</Form.Label>
           <Form.Control
-            as="textarea"
+            as='textarea'
             onChange={(event) => setText(event.target.value)}
           ></Form.Control>
           <Form.Label>Rating</Form.Label>
@@ -78,10 +90,10 @@ const AddComment = (props) => {
           </Form.Select>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={props.handleClose}>
+          <Button variant='secondary' onClick={props.handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          <Button variant='primary' onClick={handleSubmit}>
             Submit
           </Button>
         </Modal.Footer>
