@@ -92,7 +92,7 @@ import { useHistory } from "react-router";
 const User = (props) => {
   let history = useHistory();
   const [courses, setCourses] = useState();
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState([]);
   const [isValidated, setIsValidated] = useState(false);
 
   useEffect(() => {
@@ -107,7 +107,6 @@ const User = (props) => {
           },
         })
         .then((res) => {
-          console.log(res);
           // TODO: Also need to change in the future to store array instead
           setCourses(res.data[0].courses);
           setComments(res.data[0].comments);
@@ -123,9 +122,29 @@ const User = (props) => {
   if (isValidated) {
     return (
       <Container fluid>
-        <Row className='user'>Hello! {props.user.username}</Row>
-        {/* <Row className='course'>Courses: {courses}</Row>
-        <Row className='comments'>Comments: {comments}</Row> */}
+        <Row className="user">Hello! {props.user.username}</Row>
+        <Row className="cartHeading">Your Cart:</Row>
+        {courses.map((courseObj) => (
+          <Row key={courseObj}>
+            <Col
+              xs="12"
+              className="d-flex justify-content-center align-items-center py-2 box"
+            >
+              {courseObj}
+            </Col>
+          </Row>
+        ))}
+        <Row className="commentHeading">Comments:</Row>
+        {comments.map((commentObj) => (
+          <Row key={commentObj.rating}>
+            <Col
+              xs="12"
+              className="d-flex justify-content-center align-items-center py-2 box"
+            >
+              {commentObj.courseId}: {commentObj.comment}
+            </Col>
+          </Row>
+        ))}
       </Container>
     );
   } else {

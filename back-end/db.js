@@ -21,7 +21,14 @@ const UserSchema = new mongoose.Schema({
     //     type: String,
     //     required: true
     // }
-    comments: Array,
+    comments: [
+        {
+            rating: Number,
+            comment: String,
+            commenter: String,
+            courseId: String,
+        },
+    ],
     courses: Array,
 });
 
@@ -55,6 +62,7 @@ const CourseSchema = new mongoose.Schema({
             rating: Number,
             comment: String,
             commenter: String,
+            courseID: String,
         },
     ],
 });

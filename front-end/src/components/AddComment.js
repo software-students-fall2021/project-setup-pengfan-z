@@ -45,7 +45,7 @@ const AddComment = (props) => {
   return (
     <>
       <Alert
-        variant='danger'
+        variant="danger"
         onClose={() => setShowAlert(false)}
         show={showAlert}
         dismissible
@@ -59,7 +59,7 @@ const AddComment = (props) => {
         <Modal.Body>
           <Form.Label>Comment</Form.Label>
           <Form.Control
-            as='textarea'
+            as="textarea"
             onChange={(event) => setText(event.target.value)}
           ></Form.Control>
           <Form.Label>Rating</Form.Label>
@@ -78,10 +78,10 @@ const AddComment = (props) => {
           </Form.Select>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant='secondary' onClick={props.handleClose}>
+          <Button variant="secondary" onClick={props.handleClose}>
             Close
           </Button>
-          <Button variant='primary' onClick={handleSubmit}>
+          <Button variant="primary" onClick={handleSubmit}>
             Submit
           </Button>
         </Modal.Footer>
