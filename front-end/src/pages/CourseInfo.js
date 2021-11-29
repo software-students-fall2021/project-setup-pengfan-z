@@ -4,12 +4,24 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/courseInfo.css";
 import UserReview from "../components/UserReview";
+import AddComment from "../components/AddComment";
+import CustomAlert from "../components/CustomAlert";
 
-const CourseInfo = () => {
+const CourseInfo = (props) => {
   const { schoolId, subjectId, courseId } = useParams();
   const [courseInfo, setCourseInfo] = useState();
   const [showMore, setShowMore] = useState(false);
   const history = useHistory();
+
+  // for add Comment Modal (pop-out window)
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [newCourseId, setNewCourseId] = useState("");
+
+  // for alert
+  const [alert, setAlert] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   const fetchData = async () => {
     let response = await axios(`/courses/${schoolId}/${subjectId}`);
@@ -26,14 +38,19 @@ const CourseInfo = () => {
       data.prerequisite = data.sections[0].prerequisites;
     }
 
-    console.log(data);
+    // console.log(data);
 
     response = await axios(`/comments/${schoolId}/${subjectId}/${courseId}`);
-    data.userReviews = response.data;
+    console.log(response);
+    if (response.data.length !== 0) {
+      data.userReviews = response.data[0].comments;
+    } else {
+      data.userReviews = [];
+    }
     data.avgRating = 0;
     if (data.userReviews.length > 0) {
       data.avgRating = Math.round(
-        data.userReviews.reduce((sum, review) => sum + review.rating, 0) /
+        data.userReviews.reduce((sum, comment) => sum + comment.rating, 0) /
           data.userReviews.length
       );
     }
@@ -60,9 +77,50 @@ const CourseInfo = () => {
     return `${hour.toString()}:${minute.toString()}`;
   };
 
+  const getCourseId = () => {
+    return `${schoolId}-${subjectId}-${courseId}`;
+  };
+
+  const addToCart = () => {
+    if (props.user === null) {
+      history.push("/login");
+    } else {
+      const courseId = getCourseId();
+      axios
+        .post(
+          "/user/addCourse",
+          { courseId: courseId },
+          {
+            headers: {
+              Authorization: localStorage.getItem("JWT_TOKEN"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          setAlert("Succesfully add courses to your cart");
+          setShowAlert(true);
+        })
+        .catch((err) => {
+          setAlert("Failed to add courses to your cart");
+          setShowAlert(true);
+          console.error(err);
+        });
+    }
+  };
+
+  const addComment = () => {
+    if (props.user === null) {
+      history.push("/login");
+    } else {
+      setShow(true);
+    }
+  };
+
   useEffect(() => {
     getCourseInfo();
-  }, []);
+    setNewCourseId(getCourseId());
+  }, [show]);
 
   const formatDescriptionText = (description) => {
     if (description === undefined) return description;
@@ -90,10 +148,28 @@ const CourseInfo = () => {
   };
 
   if (courseInfo === undefined) {
-    return null;
+    return (
+      <div>
+        <Container fluid className='course-container justify-content-center'>
+          <h1>Do not have course data right now</h1>
+        </Container>
+      </div>
+    );
   } else {
     return (
       <div>
+        <AddComment
+          show={show}
+          handleShow={handleShow}
+          handleClose={handleClose}
+          courseId={newCourseId}
+          user={props.user}
+        />
+        <CustomAlert
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
+          alert={alert}
+        />
         <Container fluid className='course-container justify-content-center'>
           <Row className='text-center'>
             <Col>
@@ -153,14 +229,18 @@ const CourseInfo = () => {
               <Col xs='12'>
                 Status:{" "}
                 {section.status === "WaitList"
-                  ? section.waitlistTotal
+                  ? `Waitlist: ${section.waitlistTotal}`
                   : section.status}
               </Col>
               <Col className='text-start' xs='6'>
-                <Button variant='link'>Add to Cart</Button>
+                <Button variant='link' onClick={addToCart}>
+                  Add to Cart
+                </Button>
               </Col>
               <Col className='text-end' xs='6'>
-                <Button variant='link'>Comment</Button>
+                <Button variant='link' onClick={addComment}>
+                  Comment
+                </Button>
               </Col>
             </Row>
           ))}
@@ -168,8 +248,8 @@ const CourseInfo = () => {
             <Col>{formatDescriptionText(courseInfo.description)}</Col>
           </Row>
 
-          {courseInfo.userReviews?.map((review) => (
-            <UserReview key={review.id["$oid"]} details={review} />
+          {courseInfo.userReviews?.map((comment) => (
+            <UserReview key={comment._id} details={comment} />
           ))}
         </Container>
       </div>
