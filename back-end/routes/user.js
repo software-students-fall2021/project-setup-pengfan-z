@@ -89,4 +89,30 @@ userRouter.get('/me', passport.authenticate('jwt', { session: false }), async (r
     res.json({ user: req.user });
 });
 
+// add course to the cart
+userRouter.post(
+    '/addCourse',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        const { courseId } = req.body;
+        const foundUser = await User.findOne({ username: req.user.username });
+        // Avoid adding duplicated courseId
+        if (foundUser.courses.includes(courseId)) {
+            return res.status(404).json({ message: "Course exists in user's cart." });
+        }
+        User.findOneAndUpdate(
+            { username: req.user.username },
+            { $push: { courses: courseId } },
+            (error, success) => {
+                if (error) {
+                    console.log(error);
+                    return res.status(403).json({ message: 'Unauthorized' });
+                }
+                console.log(success);
+            }
+        );
+        res.json({ user: req.user });
+    }
+);
+
 module.exports = { userRouter };

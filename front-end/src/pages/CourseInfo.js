@@ -5,6 +5,7 @@ import axios from "axios";
 import "../css/courseInfo.css";
 import UserReview from "../components/UserReview";
 import AddComment from "../components/AddComment";
+import CustomAlert from "../components/CustomAlert";
 
 const CourseInfo = (props) => {
   const { schoolId, subjectId, courseId } = useParams();
@@ -17,6 +18,10 @@ const CourseInfo = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [newCourseId, setNewCourseId] = useState("");
+
+  // for alert
+  const [alert, setAlert] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   const fetchData = async () => {
     let response = await axios(`/courses/${schoolId}/${subjectId}`);
@@ -33,10 +38,15 @@ const CourseInfo = (props) => {
       data.prerequisite = data.sections[0].prerequisites;
     }
 
-    console.log(data);
+    // console.log(data);
 
     response = await axios(`/comments/${schoolId}/${subjectId}/${courseId}`);
-    data.userReviews = response.data[0].comments;
+    console.log(response);
+    if (response.data.length !== 0) {
+      data.userReviews = response.data[0].comments;
+    } else {
+      data.userReviews = [];
+    }
     data.avgRating = 0;
     if (data.userReviews.length > 0) {
       data.avgRating = Math.round(
@@ -74,6 +84,28 @@ const CourseInfo = (props) => {
   const addToCart = () => {
     if (props.user === null) {
       history.push("/login");
+    } else {
+      const courseId = getCourseId();
+      axios
+        .post(
+          "/user/addCourse",
+          { courseId: courseId },
+          {
+            headers: {
+              Authorization: localStorage.getItem("JWT_TOKEN"),
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          setAlert("Succesfully add courses to your cart");
+          setShowAlert(true);
+        })
+        .catch((err) => {
+          setAlert("Failed to add courses to your cart");
+          setShowAlert(true);
+          console.error(err);
+        });
     }
   };
 
@@ -88,7 +120,7 @@ const CourseInfo = (props) => {
   useEffect(() => {
     getCourseInfo();
     setNewCourseId(getCourseId());
-  }, []);
+  }, [show]);
 
   const formatDescriptionText = (description) => {
     if (description === undefined) return description;
@@ -118,7 +150,7 @@ const CourseInfo = (props) => {
   if (courseInfo === undefined) {
     return (
       <div>
-        <Container fluid className="course-container justify-content-center">
+        <Container fluid className='course-container justify-content-center'>
           <h1>Do not have course data right now</h1>
         </Container>
       </div>
@@ -133,36 +165,41 @@ const CourseInfo = (props) => {
           courseId={newCourseId}
           user={props.user}
         />
-        <Container fluid className="course-container justify-content-center">
-          <Row className="text-center">
+        <CustomAlert
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
+          alert={alert}
+        />
+        <Container fluid className='course-container justify-content-center'>
+          <Row className='text-center'>
             <Col>
               <Link to={`/school/${schoolId}/${subjectId}`}>
                 <i>Return to Courses</i>
               </Link>
             </Col>
           </Row>
-          <Row className="text-center">
+          <Row className='text-center'>
             <Col>
               <h1>{schoolId + " - " + courseInfo.name}</h1>
             </Col>
           </Row>
           <Row>
             <Col>
-              <p className="text-start">
+              <p className='text-start'>
                 Average Rating: {courseInfo.avgRating}
               </p>
             </Col>
           </Row>
-          <Row className="text-center comment-divider">
+          <Row className='text-center comment-divider'>
             <Col>
               <p>Prerequisite: {courseInfo.prerequisite}</p>
             </Col>
           </Row>
           {courseInfo.sections.map((section) => (
-            <Row className="comment-divider" key={section.registrationNumber}>
-              <Col xs="12">Name: {section.name}</Col>
-              <Col xs="12">Section: {section.code}</Col>
-              <Col xs="12">
+            <Row className='comment-divider' key={section.registrationNumber}>
+              <Col xs='12'>Name: {section.name}</Col>
+              <Col xs='12'>Section: {section.code}</Col>
+              <Col xs='12'>
                 Instructor:{" "}
                 {section.instructors.map((instructor, index) => (
                   <span key={instructor}>
@@ -171,14 +208,14 @@ const CourseInfo = (props) => {
                   </span>
                 ))}
               </Col>
-              <Col xs="12">Location: {section.location}</Col>
-              <Col xs="12">Instruction Mode: {section.instructionMode}</Col>
-              <Col xs="12">Units: {section.maxUnits}</Col>
-              <Col xs="12">
+              <Col xs='12'>Location: {section.location}</Col>
+              <Col xs='12'>Instruction Mode: {section.instructionMode}</Col>
+              <Col xs='12'>Units: {section.maxUnits}</Col>
+              <Col xs='12'>
                 Dates: {section.meetings[0].beginDate.substring(0, 10)} -{" "}
                 {section.meetings[0].endDate.substring(0, 10)}
               </Col>
-              <Col xs="12">
+              <Col xs='12'>
                 Meets: {getDay(section.meetings[0].beginDate.substring(0, 10))}{" "}
                 {section.meetings.length > 1
                   ? getDay(section.meetings[1].beginDate.substring(0, 10))
@@ -189,30 +226,30 @@ const CourseInfo = (props) => {
                   section.meetings[0].minutesDuration
                 )}
               </Col>
-              <Col xs="12">
+              <Col xs='12'>
                 Status:{" "}
                 {section.status === "WaitList"
                   ? `Waitlist: ${section.waitlistTotal}`
                   : section.status}
               </Col>
-              <Col className="text-start" xs="6">
-                <Button variant="link" onClick={addToCart}>
+              <Col className='text-start' xs='6'>
+                <Button variant='link' onClick={addToCart}>
                   Add to Cart
                 </Button>
               </Col>
-              <Col className="text-end" xs="6">
-                <Button variant="link" onClick={addComment}>
+              <Col className='text-end' xs='6'>
+                <Button variant='link' onClick={addComment}>
                   Comment
                 </Button>
               </Col>
             </Row>
           ))}
-          <Row className="text-center divider pt-3">
+          <Row className='text-center divider pt-3'>
             <Col>{formatDescriptionText(courseInfo.description)}</Col>
           </Row>
 
           {courseInfo.userReviews?.map((comment) => (
-            <UserReview key={comment.commenter} details={comment} />
+            <UserReview key={comment._id} details={comment} />
           ))}
         </Container>
       </div>

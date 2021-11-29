@@ -122,24 +122,24 @@ const User = (props) => {
   if (isValidated) {
     return (
       <Container fluid>
-        <Row className="user">Hello! {props.user.username}</Row>
-        <Row className="cartHeading">Your Cart:</Row>
+        <Row className='user'>Hello! {props.user.username}</Row>
+        <Row className='cartHeading'>Your Cart:</Row>
         {courses.map((courseObj) => (
           <Row key={courseObj}>
             <Col
-              xs="12"
-              className="d-flex justify-content-center align-items-center py-2 box"
+              xs='12'
+              className='d-flex justify-content-center align-items-center py-2 box'
             >
               {courseObj}
             </Col>
           </Row>
         ))}
-        <Row className="commentHeading">Comments:</Row>
+        <Row className='commentHeading'>Comments:</Row>
         {comments.map((commentObj) => (
-          <Row key={commentObj.rating}>
+          <Row key={commentObj._id}>
             <Col
-              xs="12"
-              className="d-flex justify-content-center align-items-center py-2 box"
+              xs='12'
+              className='d-flex justify-content-center align-items-center py-2 box'
             >
               {commentObj.courseId}: {commentObj.comment}
             </Col>
