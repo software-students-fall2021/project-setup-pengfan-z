@@ -131,7 +131,7 @@ const CourseInfo = (props) => {
     if (description.length > 70 && showMore) {
       return (
         <p>
-          <a href='/#' onClick={() => setShowMore(false)}>
+          <a onClick={() => setShowMore(false)}>
             Description: {description} <i>Show less</i>
           </a>
         </p>
@@ -140,7 +140,7 @@ const CourseInfo = (props) => {
     if (description.length > 70) {
       return (
         <p>
-          <a href='/#' onClick={() => setShowMore(true)}>
+          <a onClick={() => setShowMore(true)}>
             Description: {description.slice(0, 70)} <i>...show more</i>
           </a>
         </p>

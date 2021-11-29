@@ -20,7 +20,7 @@ function Home() {
         {" "}
         Gallatin School of Individualized Study
       </Link>
-      <Link id='STN' className='college' to='/school/GB'>
+      <Link id='STN' className='college' to='/school/UB'>
         {" "}
         Leonard N. Stern School of Business
       </Link>
@@ -44,7 +44,7 @@ function Home() {
         {" "}
         Silver School of Social Work
       </Link>
-      <Link id='STD' className='college' to='/school/GE'>
+      <Link id='STD' className='college' to='/school/UE'>
         {" "}
         Steinhardt School of Culture, Education, and Human Development
       </Link>
