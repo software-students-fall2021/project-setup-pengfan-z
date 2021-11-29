@@ -22,7 +22,7 @@ import axios from "axios";
 // import Auth from "./components/Auth";
 
 function App() {
-  const history = useHistory();
+  let history = useHistory();
   const [loginState, setLoginState] = useState({
     name: "Login",
     path: "/login",
@@ -44,7 +44,7 @@ function App() {
         })
         .catch((err) => {
           console.error(err.message);
-          history.push("/");
+          // history.push("/login");
         });
     }
   }, []);
@@ -86,7 +86,7 @@ function App() {
           />
 
           <Route path='/school/:schoolId/:subjectId/:courseId'>
-            <CourseInfo />
+            <CourseInfo user={user} />
           </Route>
 
           <Route path='/school/:schoolId' component={Majors} />

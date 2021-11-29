@@ -4,12 +4,19 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/courseInfo.css";
 import UserReview from "../components/UserReview";
+import AddComment from "../components/AddComment";
 
-const CourseInfo = () => {
+const CourseInfo = (props) => {
   const { schoolId, subjectId, courseId } = useParams();
   const [courseInfo, setCourseInfo] = useState();
   const [showMore, setShowMore] = useState(false);
   const history = useHistory();
+
+  // for add Comment Modal (pop-out window)
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [newCourseId, setNewCourseId] = useState("");
 
   const fetchData = async () => {
     let response = await axios(`/courses/${schoolId}/${subjectId}`);
@@ -60,8 +67,27 @@ const CourseInfo = () => {
     return `${hour.toString()}:${minute.toString()}`;
   };
 
+  const getCourseId = () => {
+    return `${schoolId}-${subjectId}-${courseId}`;
+  };
+
+  const addToCart = () => {
+    if (props.user === null) {
+      history.push("/login");
+    }
+  };
+
+  const addComment = () => {
+    if (props.user === null) {
+      history.push("/login");
+    } else {
+      setShow(true);
+    }
+  };
+
   useEffect(() => {
     getCourseInfo();
+    setNewCourseId(getCourseId());
   }, []);
 
   const formatDescriptionText = (description) => {
@@ -90,10 +116,23 @@ const CourseInfo = () => {
   };
 
   if (courseInfo === undefined) {
-    return null;
+    return (
+      <div>
+        <Container fluid className='course-container justify-content-center'>
+          <h1>Do not have course data right now</h1>
+        </Container>
+      </div>
+    );
   } else {
     return (
       <div>
+        <AddComment
+          show={show}
+          handleShow={handleShow}
+          handleClose={handleClose}
+          courseId={newCourseId}
+          user={props.user}
+        />
         <Container fluid className='course-container justify-content-center'>
           <Row className='text-center'>
             <Col>
@@ -157,10 +196,14 @@ const CourseInfo = () => {
                   : section.status}
               </Col>
               <Col className='text-start' xs='6'>
-                <Button variant='link'>Add to Cart</Button>
+                <Button variant='link' onClick={addToCart}>
+                  Add to Cart
+                </Button>
               </Col>
               <Col className='text-end' xs='6'>
-                <Button variant='link'>Comment</Button>
+                <Button variant='link' onClick={addComment}>
+                  Comment
+                </Button>
               </Col>
             </Row>
           ))}
