@@ -1,14 +1,11 @@
 import { useState } from "react";
-import { Table, Button, Container, Row, Col } from "react-bootstrap";
-import React, { Component } from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
+// import React, { Component } from "react";
 import "../css/user.css";
 import axios from "axios";
 import { useEffect } from "react";
 import { useHistory } from "react-router";
-
-// import { render } from "@testing-library/react";
-// import { Link } from "react-router-dom";
-/* React JS table code taken from: https://dev.to/abdulbasit313/an-easy-way-to-create-a-customize-dynamic-table-in-react-js-3igg */
+import CourseModal from "../components/CourseModal";
 
 // class User extends Component {
 //   constructor(props) {
@@ -95,6 +92,12 @@ const User = (props) => {
   const [comments, setComments] = useState([]);
   const [isValidated, setIsValidated] = useState(false);
 
+  // for Course Modal (pop-out window)
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [courseId, setCourseId] = useState("");
+
   useEffect(() => {
     // TODO: need to change the endpoint to the username
     if (props.user === null) {
@@ -117,35 +120,65 @@ const User = (props) => {
           history.push("/login");
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const seeComment = () => {
+    setShow(true);
+  };
 
   if (isValidated) {
     return (
-      <Container fluid>
-        <Row className='user'>Hello! {props.user.username}</Row>
-        <Row className='cartHeading'>Your Cart:</Row>
-        {courses.map((courseObj) => (
-          <Row key={courseObj}>
-            <Col
-              xs='12'
-              className='d-flex justify-content-center align-items-center py-2 box'
-            >
-              {courseObj}
-            </Col>
-          </Row>
-        ))}
-        <Row className='commentHeading'>Comments:</Row>
-        {comments.map((commentObj) => (
-          <Row key={commentObj._id}>
-            <Col
-              xs='12'
-              className='d-flex justify-content-center align-items-center py-2 box'
-            >
-              {commentObj.courseId}: {commentObj.comment}
-            </Col>
-          </Row>
-        ))}
-      </Container>
+      <>
+        <CourseModal
+          show={show}
+          handleShow={handleShow}
+          handleClose={handleClose}
+          courseId={courseId}
+        />
+        <Container fluid>
+          <Row className='user'>Hello! {props.user.username}</Row>
+          <Row className='cartHeading'>Your Cart:</Row>
+          {courses.map((courseObj) => (
+            <Row key={courseObj}>
+              <Col
+                xs='12'
+                className='d-flex justify-content-center align-items-center py-2 box'
+              >
+                <Button
+                  variant='link'
+                  onClick={() => {
+                    setCourseId(courseObj);
+                    seeComment();
+                  }}
+                >
+                  {courseObj}
+                </Button>
+              </Col>
+            </Row>
+          ))}
+          <Row className='commentHeading'>Comments:</Row>
+          {comments.map((commentObj) => (
+            <Row key={commentObj._id}>
+              <Col
+                xs='12'
+                className='d-flex justify-content-center align-items-center py-2 box'
+              >
+                <Button
+                  variant='link'
+                  onClick={() => {
+                    setCourseId(commentObj.courseId);
+                    seeComment();
+                  }}
+                >
+                  {commentObj.courseId}
+                </Button>
+                : {commentObj.comment}
+              </Col>
+            </Row>
+          ))}
+        </Container>
+      </>
     );
   } else {
     return <div></div>;

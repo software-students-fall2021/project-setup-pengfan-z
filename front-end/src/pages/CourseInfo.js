@@ -120,6 +120,7 @@ const CourseInfo = (props) => {
   useEffect(() => {
     getCourseInfo();
     setNewCourseId(getCourseId());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
   const formatDescriptionText = (description) => {
@@ -130,7 +131,7 @@ const CourseInfo = (props) => {
     if (description.length > 70 && showMore) {
       return (
         <p>
-          <a onClick={() => setShowMore(false)}>
+          <a href='/#' onClick={() => setShowMore(false)}>
             Description: {description} <i>Show less</i>
           </a>
         </p>
@@ -139,7 +140,7 @@ const CourseInfo = (props) => {
     if (description.length > 70) {
       return (
         <p>
-          <a onClick={() => setShowMore(true)}>
+          <a href='/#' onClick={() => setShowMore(true)}>
             Description: {description.slice(0, 70)} <i>...show more</i>
           </a>
         </p>
