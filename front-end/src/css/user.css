@@ -35,3 +35,17 @@ img {
   text-decoration: underline;
   font-size: 40px;
 }
+
+.commentHeading {
+  padding-top: 12px;
+  padding-left: 25px;
+  text-decoration: underline;
+  font-size: 25px;
+}
+
+.cartHeading {
+  padding-top: 12px;
+  padding-left: 25px;
+  text-decoration: underline;
+  font-size: 25px;
+}

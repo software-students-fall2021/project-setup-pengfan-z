@@ -10,13 +10,14 @@ const courseCommentsRouter = Router();
 courseCommentsRouter.get('/:schoolId/:subjectId/:courseId', async (req, res, next) => {
     const { schoolId, subjectId, courseId } = req.params;
     // TODO: get comments from mongodb databases
-    axios
-        .get('https://my.api.mockaroo.com/user_review.json?key=eccb0b30')
-        .then((response) => {
-            const userReviews = response.data;
-            res.json(userReviews);
-        })
-        .catch((err) => next(err));
+    Course.find({ courseId: `${schoolId}-${subjectId}-${courseId}` }, (err, data) => {
+        if (err) {
+            res.status(500).send(`Error: ${err.message}`);
+        } else {
+            // console.log(data);
+            res.json(data);
+        }
+    });
 });
 
 courseCommentsRouter.post('/:courseId/:userId', async (req, res) => {
@@ -26,6 +27,7 @@ courseCommentsRouter.post('/:courseId/:userId', async (req, res) => {
 
     const { comment } = req.body;
     comment.commenter = userId;
+    comment.courseId = courseId;
     // TODO: This creating and adding a comment to a Course record which may change based on how the schema is implemented in the database
     // Check that this relationship works
 
