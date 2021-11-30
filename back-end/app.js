@@ -9,7 +9,6 @@ const { majorsRouter } = require('./routes/majors');
 const { coursesRouter } = require('./routes/courses');
 const { courseCommentsRouter } = require('./routes/courseComments');
 const { courseinfoRouter } = require('./routes/courseinfo');
-const { loginRouter } = require('./routes/login');
 const { userRouter } = require('./routes/user');
 const { userPortalRouter } = require('./routes/userportal');
 
@@ -23,7 +22,7 @@ app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming 
 // app.use("/static", express.static("public"))
 
 app.get('/', (req, res) => {
-  res.json('Hello World.');
+    res.json('Hello World.');
 });
 
 app.use('/majors', majorsRouter);
@@ -31,8 +30,6 @@ app.use('/majors', majorsRouter);
 app.use('/courses', coursesRouter);
 
 app.use('/comments', courseCommentsRouter);
-
-//app.use('/login', loginRouter);
 
 app.use('/courseinfo', courseinfoRouter);
 
