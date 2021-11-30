@@ -1,6 +1,6 @@
 const server = require('./app');
 
-const port = 4000;
+const port = 5000;
 
 // call a function to start listening to the port
 const listener = server.listen(port, () => {
