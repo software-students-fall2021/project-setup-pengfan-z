@@ -64,7 +64,7 @@ const CourseInfo = (props) => {
   };
 
   const getDay = (date) => {
-    let day = new Date(date);
+    let day = new Date(date).toUTCString();
     day = day.toString().substring(0, 4);
     return day;
   };
