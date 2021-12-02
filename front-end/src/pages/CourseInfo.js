@@ -214,21 +214,31 @@ const CourseInfo = (props) => {
               <Col xs='12'>Location: {section.location}</Col>
               <Col xs='12'>Instruction Mode: {section.instructionMode}</Col>
               <Col xs='12'>Units: {section.maxUnits}</Col>
-              <Col xs='12'>
-                Dates: {section.meetings[0].beginDate.substring(0, 10)} -{" "}
-                {section.meetings[0].endDate.substring(0, 10)}
-              </Col>
-              <Col xs='12'>
-                Meets: {getDay(section.meetings[0].beginDate.substring(0, 10))}{" "}
-                {section.meetings.length > 1
-                  ? getDay(section.meetings[1].beginDate.substring(0, 10))
-                  : ""}{" "}
-                {section.meetings[0].beginDate.substring(11, 16)} -{" "}
-                {getEndTime(
-                  section.meetings[0].beginDate.substring(11, 16),
-                  section.meetings[0].minutesDuration
-                )}
-              </Col>
+              {section.meetings === null ? (
+                <></>
+              ) : (
+                <Col xs='12'>
+                  Dates: {section.meetings[0].beginDate.substring(0, 10)} -{" "}
+                  {section.meetings[0].endDate.substring(0, 10)}
+                </Col>
+              )}
+              {section.meetings === null ? (
+                <></>
+              ) : (
+                <Col xs='12'>
+                  Meets:{" "}
+                  {getDay(section.meetings[0].beginDate.substring(0, 10))}{" "}
+                  {section.meetings.length > 1
+                    ? getDay(section.meetings[1].beginDate.substring(0, 10))
+                    : ""}{" "}
+                  {section.meetings[0].beginDate.substring(11, 16)} -{" "}
+                  {getEndTime(
+                    section.meetings[0].beginDate.substring(11, 16),
+                    section.meetings[0].minutesDuration
+                  )}
+                </Col>
+              )}
+
               <Col xs='12'>
                 Status:{" "}
                 {section.status === "WaitList"
