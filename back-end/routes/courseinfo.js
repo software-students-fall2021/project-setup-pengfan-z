@@ -27,7 +27,6 @@ courseinfoRouter.get('/:courseId', (req, res) => {
             console.error(err);
             return res.status(err.response.status).json(err.response.data);
         });
-    // res.json('success');
 });
 
 // courseinfoRouter.use((error, req, res) => {

@@ -20,7 +20,6 @@ const User = (props) => {
   const [courseId, setCourseId] = useState("");
 
   useEffect(() => {
-    // TODO: need to change the endpoint to the username
     if (props.user === null) {
       history.push("/login");
     } else {
@@ -31,7 +30,6 @@ const User = (props) => {
           },
         })
         .then((res) => {
-          // TODO: Also need to change in the future to store array instead
           setCourses(res.data[0].courses);
           setComments(res.data[0].comments);
           setIsValidated(true);
