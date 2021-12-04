@@ -40,9 +40,16 @@ const CreateAccount = (props) => {
           history.push(`/user/${newUserName}`);
         })
         .catch((err) => {
-          console.log(err);
+          if (err.response.status === 403) {
+            // console.log(err.response.data);
+            setAlert(err.response.data.message);
+          } else if (err.response.status === 400) {
+            // console.log(err.response.status);
+            setAlert(err.response.data.errors[0].msg);
+          } else {
+            setAlert(err.message);
+          }
           setShowAlert(true);
-          setAlert(err.message);
         });
     }
   };

@@ -3,14 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 
 const AddComment = (props) => {
-  //   const [comment, setComment] = useState({
-  //     comment: {
-  //       rating: 0,
-  //       comment: "",
-  //     },
-  //   });
   const [text, setText] = useState("");
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(1);
   const [alert, setAlert] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
@@ -19,11 +13,6 @@ const AddComment = (props) => {
       setAlert("All fields are required");
       setShowAlert(true);
     } else {
-      //   setComment((prevComment) => ({
-      //     ...prevComment,
-      //     rating: rating,
-      //     comment: text,
-      //   }));
       const userId = props.user.username;
       axios
         .post(
@@ -77,9 +66,9 @@ const AddComment = (props) => {
           <Form.Label>Rating</Form.Label>
           <Form.Select
             value={rating}
+            defaultValue={rating}
             onChange={(e) => {
               setRating(parseInt(e.target.value));
-              //   console.log(typeof parseInt(e.target.value));
             }}
           >
             <option value={1}>1</option>
