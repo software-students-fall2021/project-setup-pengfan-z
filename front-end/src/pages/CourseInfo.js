@@ -38,8 +38,6 @@ const CourseInfo = (props) => {
       data.prerequisite = data.sections[0].prerequisites;
     }
 
-    // console.log(data);
-
     response = await axios(`/comments/${schoolId}/${subjectId}/${courseId}`);
     console.log(response);
     if (response.data.length !== 0) {

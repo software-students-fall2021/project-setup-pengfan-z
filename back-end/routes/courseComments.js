@@ -10,12 +10,12 @@ courseCommentsRouter.use(passport.initialize());
 
 courseCommentsRouter.get('/:schoolId/:subjectId/:courseId', async (req, res, next) => {
     const { schoolId, subjectId, courseId } = req.params;
-    // TODO: get comments from mongodb databases
+
     Course.find({ courseId: `${schoolId}-${subjectId}-${courseId}` }, (err, data) => {
         if (err) {
             res.status(500).send(`Error: ${err.message}`);
         } else {
-            // console.log(data);
+            
             res.json(data);
         }
     });
@@ -25,16 +25,12 @@ courseCommentsRouter.post(
     '/:courseId/:userId',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        // const { courseId } = req.params;
 
         const { courseId, userId } = req.params;
-        // const { user } = req;
 
         const { comment } = req.body;
         comment.commenter = userId;
         comment.courseId = courseId;
-        // TODO: This creating and adding a comment to a Course record which may change based on how the schema is implemented in the database
-        // Check that this relationship works
 
         const user = await User.findOne({ username: userId });
         if (user) {

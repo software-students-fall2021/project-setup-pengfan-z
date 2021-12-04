@@ -15,7 +15,6 @@ majorsRouter.get('/:schoolId', (req, res) => {
         .then((response) => {
             const allMajors = response.data;
             if (Object.prototype.hasOwnProperty.call(allMajors, schoolId)) {
-                // TODO
                 const majorsList = allMajors[schoolId];
                 return res.json(majorsList);
             }
