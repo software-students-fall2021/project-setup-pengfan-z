@@ -16,5 +16,6 @@
   color: white;
 }
 
-
-
+.accountLink {
+  text-decoration: none;
+}
