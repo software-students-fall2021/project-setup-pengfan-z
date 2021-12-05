@@ -1,4 +1,12 @@
-import { Container, Navbar, Offcanvas, Nav, Button, Dropdown, DropdownButton } from "react-bootstrap";
+import {
+  Container,
+  Navbar,
+  Offcanvas,
+  Nav,
+  Button,
+  Dropdown,
+  DropdownButton,
+} from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import "../css/header.css";
 
@@ -7,16 +15,16 @@ const Header = (props) => {
   const history = useHistory();
   // create logout function, removing token from local storage
   const logout = () => {
-    localStorage.removeItem('JWT_TOKEN');
+    localStorage.removeItem("JWT_TOKEN");
     //clear userstate from username
-    props.setUser(null); 
+    props.setUser(null);
     //redirect back to login, disable user page access
     history.push("/login");
-  }
+  };
 
   const click = () => {
     document.getElementById("my_dropdown").classList.toggle("show");
-  }
+  };
   return (
     <div>
       <Navbar expand={false} className='background navbar-dark fixed-top'>
@@ -43,19 +51,26 @@ const Header = (props) => {
             </Link>
           </Navbar.Brand>
           <Navbar.Brand>
-            {
-              props.user === null ? <Link to="/login" className='navLink'>
+            {props.user === null ? (
+              <Link to='/login' className='navLink'>
                 Login
-              </Link> :
-                <>
-                <DropdownButton id="dropdown-basic-button" title={props.user.username}>
-                  <Dropdown.Item href="#/user">My Account</Dropdown.Item>
+              </Link>
+            ) : (
+              <>
+                <DropdownButton
+                  id='dropdown-basic-button'
+                  title={props.user.username}
+                >
+                  <Dropdown.Item>
+                    <Link className='accountLink' to='/user'>
+                      My Account
+                    </Link>
+                  </Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item onClick= {logout} href="#/login">Logout </Dropdown.Item>
-                  </DropdownButton>
-                </>
-            }
-            
+                  <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+                </DropdownButton>
+              </>
+            )}
           </Navbar.Brand>
         </Container>
       </Navbar>
