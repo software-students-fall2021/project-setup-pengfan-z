@@ -1,4 +1,4 @@
-import { Container, Navbar, Offcanvas, Nav, Button } from "react-bootstrap";
+import { Container, Navbar, Offcanvas, Nav, Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import "../css/header.css";
 
@@ -12,6 +12,10 @@ const Header = (props) => {
     props.setUser(null); 
     //redirect back to login, disable user page access
     history.push("/login");
+  }
+
+  const click = () => {
+    document.getElementById("my_dropdown").classList.toggle("show");
   }
   return (
     <div>
@@ -44,13 +48,14 @@ const Header = (props) => {
                 Login
               </Link> :
                 <>
-                  <Link to='/user'>{props.user.username}</Link>
-                  <Button onClick= {logout}> Logout </Button>
+                <DropdownButton id="dropdown-basic-button" title={props.user.username}>
+                  <Dropdown.Item href="#/user">My Account</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick= {logout} href="#/login">Logout </Dropdown.Item>
+                  </DropdownButton>
                 </>
             }
-            {/* <Link to={props.LoginState.path} className='navLink'>
-              {props.LoginState.name}
-            </Link> */}
+            
           </Navbar.Brand>
         </Container>
       </Navbar>
