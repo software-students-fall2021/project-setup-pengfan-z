@@ -39,6 +39,37 @@ const Header = (props) => {
                 <Link className='burgerLink' to='/cas'>
                   CAS
                 </Link>
+                
+                <Link className='burgerLink' to='/UD'>
+                  Dentistry
+                </Link>
+                <Link className='burgerLink' to='/UG'>
+                  Gallatin
+                </Link>
+                <Link className='burgerLink' to='/UB'>
+                  Stern
+                </Link>
+                <Link className='burgerLink' to='/GP'>
+                  Wagner
+                </Link>
+                <Link className='burgerLink' to='/UN'>
+                  Nursing
+                </Link>
+                <Link className='burgerLink' to='/UU'>
+                  Global Public Health
+                </Link>
+                <Link className='burgerLink' to='/US'>
+                  Silver
+                </Link>
+                <Link className='burgerLink' to='/UE'>
+                  Steinhardt
+                </Link>
+                <Link className='burgerLink' to='/UY'>
+                  Tandon
+                </Link>
+                <Link className='burgerLink' to='/UT'>
+                  Tisch
+                </Link> 
                 <Link className='burgerLink' to='/user'>
                   My Account
                 </Link>
