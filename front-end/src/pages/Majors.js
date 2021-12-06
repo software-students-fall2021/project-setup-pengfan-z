@@ -13,6 +13,7 @@ const Majors = () => {
   let { schoolId } = useParams();
 
   useEffect(() => {
+    console.log(schoolId);
     axios
       .get(`/majors/${schoolId}`)
       .then((res) => {
@@ -25,26 +26,32 @@ const Majors = () => {
       });
   }, [schoolId]);
 
-  return (
-    <div>
-      <h1>{schoolId}</h1>
-      <Container fluid>
-        <Row>
-          {majorsId.map((id) => (
-            <Col
-              className='d-flex justify-content-center align-items-center py-2 box'
-              key={id}
-              xs='6'
-            >
-              <Link className='major' to={`/school/${schoolId}/${id}`}>
-                {majors[id].name}
-              </Link>
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    </div>
-  );
+  if (majorsId === null) {
+    console.log(majorsId);
+    return <></>;
+  } else {
+    console.log(majors);
+    return (
+      <div>
+        <h1>{schoolId}</h1>
+        <Container fluid>
+          <Row>
+            {majorsId.map((id) => (
+              <Col
+                className='d-flex justify-content-center align-items-center py-2 box'
+                key={id}
+                xs='6'
+              >
+                <Link className='major' to={`/school/${schoolId}/${id}`}>
+                  {majors[id] ? majors[id].name : ""}
+                </Link>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </div>
+    );
+  }
 };
 
 export default Majors;
