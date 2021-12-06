@@ -2,6 +2,10 @@
 
 ## Smart Choice Overview:
 
+### Link For Smart Choice APP
+
+[Smart Choice](http://137.184.206.98:3000)
+
 ### What?
 
 This is a web app that can help NYU students learning about the courses in an easy and powerful way.
@@ -40,6 +44,6 @@ This project was built by and for NYU students looking to decrease the amount of
 
 ### Instructions to Build and Test:
 
-Not yet available
+To run front-end, navigate to the front-end folder. Run "npm install" then start the front-end with "npm start".
 
-To run front-end, navigate to the front-end folder. Run "npm install" then test with "npm start".
+To run test, navigate to the back-end folder. Run "npm test".
