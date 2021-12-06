@@ -3,7 +3,6 @@ import {
   Navbar,
   Offcanvas,
   Nav,
-  Button,
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
@@ -22,9 +21,6 @@ const Header = (props) => {
     history.push("/login");
   };
 
-  const click = () => {
-    document.getElementById("my_dropdown").classList.toggle("show");
-  };
   return (
     <div>
       <Navbar expand={false} className='background navbar-dark fixed-top'>
@@ -36,40 +32,40 @@ const Header = (props) => {
                 <Link className='burgerLink' to='/'>
                   Home
                 </Link>
-                <Link className='burgerLink' to='/cas'>
+                <Link className='burgerLink' to='/school/UA'>
                   CAS
                 </Link>
-                
-                <Link className='burgerLink' to='/UD'>
+
+                <Link className='burgerLink' to='/school/UD'>
                   Dentistry
                 </Link>
-                <Link className='burgerLink' to='/UG'>
+                <Link className='burgerLink' to='/school/UG'>
                   Gallatin
                 </Link>
-                <Link className='burgerLink' to='/UB'>
+                <Link className='burgerLink' to='/school/UB'>
                   Stern
                 </Link>
-                <Link className='burgerLink' to='/GP'>
+                <Link className='burgerLink' to='/school/GP'>
                   Wagner
                 </Link>
-                <Link className='burgerLink' to='/UN'>
+                <Link className='burgerLink' to='/school/UN'>
                   Nursing
                 </Link>
-                <Link className='burgerLink' to='/UU'>
+                <Link className='burgerLink' to='/school/UU'>
                   Global Public Health
                 </Link>
-                <Link className='burgerLink' to='/US'>
+                <Link className='burgerLink' to='/school/US'>
                   Silver
                 </Link>
-                <Link className='burgerLink' to='/UE'>
+                <Link className='burgerLink' to='/school/UE'>
                   Steinhardt
                 </Link>
-                <Link className='burgerLink' to='/UY'>
+                <Link className='burgerLink' to='/school/UY'>
                   Tandon
                 </Link>
-                <Link className='burgerLink' to='/UT'>
+                <Link className='burgerLink' to='/school/UT'>
                   Tisch
-                </Link> 
+                </Link>
                 <Link className='burgerLink' to='/user'>
                   My Account
                 </Link>
