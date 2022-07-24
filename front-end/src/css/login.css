@@ -1,0 +1,13 @@
+.loginForm {
+  margin-top: 70px;
+  max-width: 50%;
+  justify-content: center;
+}
+
+.button {
+  margin-top: 1em;
+}
+
+.btnLink {
+  text-decoration: none;
+}

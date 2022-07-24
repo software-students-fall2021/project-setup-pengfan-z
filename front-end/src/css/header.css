@@ -1,0 +1,21 @@
+.background {
+  background-color: rgb(87, 6, 140);
+}
+
+.burger {
+  width: 50%;
+  border-color: white;
+}
+
+.burgerLink {
+  margin-bottom: 0.5em;
+}
+
+.navLink {
+  text-decoration: none;
+  color: white;
+}
+
+.accountLink {
+  text-decoration: none;
+}

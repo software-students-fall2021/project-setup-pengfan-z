@@ -1,0 +1,10 @@
+.title {
+  text-align: center;
+  margin-top: 1em;
+}
+
+.form {
+  margin-top: 20px;
+  max-width: 50%;
+  /* min-width: 50%; */
+}

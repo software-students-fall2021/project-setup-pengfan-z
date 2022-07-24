@@ -1,0 +1,11 @@
+.course-container {
+  width: 95%;
+}
+
+.divider {
+  border-bottom: 3px solid #bbb;
+}
+
+.comment-divider {
+  border-bottom: 1px solid #bbb;
+}
